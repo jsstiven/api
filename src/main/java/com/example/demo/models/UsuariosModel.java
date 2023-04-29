@@ -1,12 +1,9 @@
 package com.example.demo.models;
 
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.GenerationType;
 
@@ -20,13 +17,10 @@ public class UsuariosModel {
 
     private String nombres;
     private String apellidos;
+    private String usuario;
     private String correo;
     private String contrasena;
-
-
-    @ManyToOne
-    @JoinColumn(name = "programa_id")
-    private ProgramaModel programa_id;
+    private Integer programa_id;
 
     public Integer getCc() {
         return cc;
@@ -68,14 +62,21 @@ public class UsuariosModel {
         this.contrasena = contrasena;
     }
 
-    public String getPrograma_id() {
-        return programa_id.getNombre();
+
+    public String getUsuario() {
+        return usuario;
     }
 
-    public void setPrograma_id(ProgramaModel programa_id) {
+    public void setUsuario(String usurio) {
+        this.usuario = usurio;
+    }
+
+    public Integer getPrograma_id() {
+        return programa_id;
+    }
+
+    public void setPrograma_id(Integer programa_id) {
         this.programa_id = programa_id;
     }
-
-    
 
 }

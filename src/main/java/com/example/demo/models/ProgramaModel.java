@@ -1,4 +1,5 @@
 package com.example.demo.models;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -13,17 +14,9 @@ public class ProgramaModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, nullable = false)
-    private Integer id;
+    private Integer idprogramaac;
 
     private String nombre;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getNombre() {
         return nombre;
@@ -33,6 +26,12 @@ public class ProgramaModel {
         this.nombre = nombre;
     }
 
-    
+    public Integer getIdprogramaac() {
+        return idprogramaac;
+    }
+
+    public void setIdprogramaac(Integer idprogramaac) {
+        this.idprogramaac = idprogramaac;
+    }
 
 }

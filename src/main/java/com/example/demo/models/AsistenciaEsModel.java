@@ -23,7 +23,7 @@ public class AsistenciaEsModel {
     Date dia;
     Integer id_roles_has_usuarios;
     String tema;
-    Integer cctu;
+    Integer cces;
 
     public Integer getIdasistenciases() {
         return idasistenciases;
@@ -73,12 +73,12 @@ public class AsistenciaEsModel {
         this.tema = tema;
     }
 
-    public Integer getCctu() {
-        return cctu;
+    public Integer getCcEs() {
+        return cces;
     }
 
-    public void setCctu(Integer cctu) {
-        this.cctu = cctu;
+    public void setCcEs(Integer cces) {
+        this.cces = cces;
     }
 
 }

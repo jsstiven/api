@@ -1,5 +1,6 @@
 package com.example.demo.views;
 
+import java.sql.Date;
 import java.sql.Time;
 
 public class VistaReporteAsistenciaTu {
@@ -9,6 +10,7 @@ public class VistaReporteAsistenciaTu {
     Integer cedula;
     Time entrada;
     Time salida;
+    Date fecha;
 
     public String getNombres() {
         return nombres;
@@ -50,4 +52,13 @@ public class VistaReporteAsistenciaTu {
         this.salida = salida;
     }
 
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
+
+    
 }

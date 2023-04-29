@@ -14,9 +14,14 @@ public class ProgramaService {
     @Autowired
     ProgramaRepository programaRepository;
 
-    // Metodos
-
+    //Listar programas
     public ArrayList<ProgramaModel> buscarPrograma() {
         return (ArrayList<ProgramaModel>) programaRepository.findAll();
+    }
+
+    //Guardar programa academico
+
+    public void guardarProgramaAc(ProgramaModel programaModel){
+        programaRepository.save(programaModel);
     }
 }
