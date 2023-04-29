@@ -10,4 +10,11 @@ import com.example.demo.repositories.Agendacion_Has_Roles_Has_UsuariosRepository
 public class Agendacion_Has_Roles_Has_UsuariosService {
     @Autowired
     Agendacion_Has_Roles_Has_UsuariosRepository agrhuRepository;
+
+    //Guardar asignacion agenda
+
+    public void guardarAsigAgenda(Integer idtutor){
+        agrhuRepository.guardarasig(idtutor);
+    }
+
 }

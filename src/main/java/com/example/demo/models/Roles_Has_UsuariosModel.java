@@ -13,10 +13,10 @@ public class Roles_Has_UsuariosModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, nullable = false)
-    Integer id;
+    private Integer id;
 
-    Integer roles_idroles;
-    Integer usuarios_cc;
+    private Integer roles_idroles;
+    private Integer usuarios_cc;
 
     public Integer getId() {
         return id;

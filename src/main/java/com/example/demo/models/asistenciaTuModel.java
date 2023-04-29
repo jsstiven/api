@@ -16,12 +16,12 @@ public class asistenciaTuModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, nullable = false)
-    Integer idasistenciatu;
+    private Integer idasistenciatu;
     
-    Time entrada;
-    Time salida;
-    Date fecha;
-    Integer id_roles_has_usuarios;
+    private Time entrada;
+    private Time salida;
+    private Date fecha;
+    private Integer id_roles_has_usuarios;
 
     public Integer getIdasistenciatu() {
         return idasistenciatu;

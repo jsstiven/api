@@ -1,22 +1,8 @@
-package com.example.demo.models;
+package com.example.demo.views;
 
 import java.sql.Date;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-
-@Entity
-@Table(name = "asistenciases")
-
-public class AsistenciaEsModel {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true, nullable = false)
-    private Integer idasistenciases;
+public class VistaGuardarAsisEs {
 
     private String asignatura;
     private String grupo;
@@ -24,14 +10,8 @@ public class AsistenciaEsModel {
     private Integer id_roles_has_usuarios;
     private String tema;
     private Integer cces;
-
-    public Integer getIdasistenciases() {
-        return idasistenciases;
-    }
-
-    public void setIdasistenciases(Integer idasistenciases) {
-        this.idasistenciases = idasistenciases;
-    }
+    private String comentarios;
+    private Integer puntuacion;
 
     public String getAsignatura() {
         return asignatura;
@@ -73,12 +53,28 @@ public class AsistenciaEsModel {
         this.tema = tema;
     }
 
-    public Integer getCcEs() {
+    public Integer getCces() {
         return cces;
     }
 
-    public void setCcEs(Integer cces) {
+    public void setCces(Integer cces) {
         this.cces = cces;
+    }
+
+    public String getComentarios() {
+        return comentarios;
+    }
+
+    public void setComentarios(String comentarios) {
+        this.comentarios = comentarios;
+    }
+
+    public Integer getPuntuacion() {
+        return puntuacion;
+    }
+
+    public void setPuntuacion(Integer puntuacion) {
+        this.puntuacion = puntuacion;
     }
 
 }

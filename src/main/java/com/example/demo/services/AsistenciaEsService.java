@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.models.AsistenciaEsModel;
 import com.example.demo.repositories.AsistenciaEsRepository;
 import com.example.demo.views.VistaReporteAsistenciaEs;
 
@@ -16,6 +17,12 @@ import jakarta.persistence.Tuple;
 public class AsistenciaEsService {
     @Autowired
     AsistenciaEsRepository asistenciaEsRepository;
+
+    // Guardar asistencia estudiante
+    public void guardarAsistenciaEs(AsistenciaEsModel asistenciaEsModel){
+        asistenciaEsRepository.save(asistenciaEsModel);
+    }
+    
 
     // Reporte asistencia estudiantes
     public ArrayList<VistaReporteAsistenciaEs> reporteAsisEstu() {

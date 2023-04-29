@@ -7,10 +7,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.models.asistenciaTuModel;
 import com.example.demo.services.AsistenciaTuService;
 import com.example.demo.views.VistaReporteAsistenciaTu;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 
 @RestController
@@ -19,8 +21,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class AsistenciaTuController {
     @Autowired
     AsistenciaTuService asTuService;
+    
+    // Guardar asistencia Tutor
 
-    // Guardar Usuario
+    @PostMapping("/guardarasistencia")
+    public void guardarAsisTutor(asistenciaTuModel asistenciaTuModel){
+        asTuService.guardarAsisTutor(asistenciaTuModel);
+    }
+
+    // Reporte Tutor
     @GetMapping("/reportetutor")
     public ArrayList<VistaReporteAsistenciaTu> reporteTutor() {
         return asTuService.reporteAsisTu();

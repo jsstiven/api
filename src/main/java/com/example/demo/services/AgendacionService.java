@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.models.AgendacionModel;
 import com.example.demo.repositories.AgendacionRepository;
 import com.example.demo.views.VistaAgendas;
 
@@ -18,6 +19,12 @@ public class AgendacionService {
 
     @Autowired
     AgendacionRepository agendacionRepository;
+
+    // Guardar Agendacion
+
+    public void guardarAgendacion(AgendacionModel agendacionModel){
+        agendacionRepository.save(agendacionModel);
+    }
 
     // Reporte asistencia estudiantes
     public ArrayList<VistaAgendas> reporteAgendas() {

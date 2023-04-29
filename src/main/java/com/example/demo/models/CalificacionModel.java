@@ -13,12 +13,12 @@ public class CalificacionModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, nullable = false)
-    Integer idcalificacion;
+    private Integer idcalificacion;
 
-    String comentarios;
-    Integer puntuacion;
-    Integer cces;
-    Integer id_roles_has_usuarios;
+    private String comentarios;
+    private Integer puntuacion;
+    private Integer cces;
+    private Integer id_roles_has_usuarios;
 
     public Integer getIdcalificacion() {
         return idcalificacion;

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,7 +27,13 @@ public class UsuarioController {
     @Autowired
     Roles_Has_UsuariosService rhuService = new Roles_Has_UsuariosService();
     Roles_Has_UsuariosModel nuevaAsig = new Roles_Has_UsuariosModel();
-    // Actualizar usuario
+
+    // Listar Tutores
+
+    @GetMapping("/listatutores")
+    public ArrayList<UsuariosModel> listatutores(){
+        return usuarioService.listaTutores();
+    }
 
     // Guardar Usuario
     @PostMapping("/guardarusuario")

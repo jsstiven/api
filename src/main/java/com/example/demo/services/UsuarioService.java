@@ -17,6 +17,26 @@ public class UsuarioService {
     @Autowired
     UsuarioRepository usuarioRepository;
 
+    // Listar Tutores
+
+    public ArrayList<UsuariosModel> listaTutores() {
+        ArrayList<UsuariosModel> dato = new ArrayList<UsuariosModel>();
+        UsuariosModel u = new UsuariosModel();
+
+        for (Tuple i : usuarioRepository.listarTutores()) {
+
+            u.setCc((Integer) i.get("id"));
+            u.setNombres((String) i.get("nombres"));
+            u.setApellidos((String) i.get("apellidos"));
+
+            dato.add(u);
+
+            u = new UsuariosModel();
+        }
+
+        return dato;
+    }
+
     // Login
     public ArrayList<RolesModel> login(String usuario, String contrasena) {
 

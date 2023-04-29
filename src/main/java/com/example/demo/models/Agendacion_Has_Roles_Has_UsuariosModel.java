@@ -13,10 +13,10 @@ public class Agendacion_Has_Roles_Has_UsuariosModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, nullable = false)
-    Integer id;
+    private Integer id;
 
-    Integer agendacion_idagendacion;
-    Integer roles_has_usuarios;
+    private Integer agendacion_idagendacion;
+    private Integer roles_has_usuarios;
 
     public Integer getId() {
         return id;

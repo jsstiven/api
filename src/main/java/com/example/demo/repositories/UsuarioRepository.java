@@ -16,6 +16,11 @@ import jakarta.persistence.Tuple;
 @EnableJpaRepositories
 public interface UsuarioRepository extends JpaRepository<UsuariosModel, Integer> {
 
+    // listar tutores
+    @Query(value = "select rhu.id as id, u.nombres as nombres, u.apellidos as apellidos from usuarios u join roles_has_usuarios rhu ON rhu.usuarios_cc = u.cc where rhu.roles_idroles = 2", nativeQuery = true)
+    public ArrayList<Tuple> listarTutores();
+
+    // login
     @Query(value = "select r.rol as rol from roles r join roles_has_usuarios rhu on r.idrol = rhu.roles_idroles join usuarios u on rhu.usuarios_cc = u.cc where u.usuario = :usuario and u.contrasena = :contrasena", nativeQuery = true)
     public ArrayList<Tuple> login(@Param("usuario") String usuario, @Param("contrasena") String contrasena);
 

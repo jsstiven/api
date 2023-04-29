@@ -17,14 +17,14 @@ public class AgendacionModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, nullable = false)
-    Integer idagendacion;
+    private Integer idagendacion;
 
-    Date fecha;
-    Time hora;
-    String tema;
-    String grupo;
-    Integer cces;
-    Boolean activo;
+    private Date fecha;
+    private Time hora;
+    private String tema;
+    private String grupo;
+    private Integer cces;
+    private Boolean activo;
 
     public Integer getIdagendacion() {
         return idagendacion;
