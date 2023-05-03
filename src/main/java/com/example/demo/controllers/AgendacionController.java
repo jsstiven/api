@@ -27,17 +27,37 @@ public class AgendacionController {
 
     // Guardar agendacion
     @PostMapping("/guardaragenda/query")
-    public void guaradarAgenda(@RequestBody AgendacionModel agendacionModel, @RequestParam("cedulatu") Integer idtutor){
-        
+    public void guaradarAgenda(@RequestBody AgendacionModel agendacionModel,
+            @RequestParam("cedulatu") Integer idtutor) {
+
         agendacionService.guardarAgendacion(agendacionModel);
         try {
             agrhuService.guardarAsigAgenda(idtutor);
         } catch (Exception e) {
-           System.out.println("no trae consulta");
+            System.out.println("no trae consulta");
         }
 
     }
 
+    // Editar hora agendacion
+    @PostMapping("/editaragenda")
+    public void editarAgenda(@RequestBody AgendacionModel agendacionModel) {
+        try {
+            agendacionService.editarAgenda(agendacionModel);
+        } catch (Exception e) {
+            System.out.println("no traer consulta");
+        }
+    }
+
+    // Cancelar o maracar realizada tutoria agendada
+    @PostMapping("/cancelartutoria")
+    public void cancelarTutoria(@RequestBody AgendacionModel agendacionModel) {
+        try {
+            agendacionService.cancelarTutoria(agendacionModel);
+        } catch (Exception e) {
+            System.out.println("no traer consulta");
+        }
+    }
 
     // Reporte asistencia estudiante
     @GetMapping("/reporteagendacion")

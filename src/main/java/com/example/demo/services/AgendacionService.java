@@ -22,8 +22,21 @@ public class AgendacionService {
 
     // Guardar Agendacion
 
-    public void guardarAgendacion(AgendacionModel agendacionModel){
+    public void guardarAgendacion(AgendacionModel agendacionModel) {
         agendacionRepository.save(agendacionModel);
+    }
+
+    // Editar agendacion
+
+    public void editarAgenda(AgendacionModel agendacionModel) {
+        agendacionRepository.editarAgenda(agendacionModel.getFecha(), agendacionModel.getHora(),
+                agendacionModel.getIdagendacion());
+    }
+
+    // Cancelar o maracar realizada tutoria agendada
+
+    public void cancelarTutoria(AgendacionModel agendacionModel) {
+        agendacionRepository.cancelarTutoria(agendacionModel.getActivo(), agendacionModel.getIdagendacion());
     }
 
     // Reporte asistencia estudiantes

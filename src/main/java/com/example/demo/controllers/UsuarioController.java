@@ -16,7 +16,6 @@ import com.example.demo.models.UsuariosModel;
 import com.example.demo.services.Roles_Has_UsuariosService;
 import com.example.demo.services.UsuarioService;
 
-import jakarta.persistence.Tuple;
 
 @RestController
 @Controller

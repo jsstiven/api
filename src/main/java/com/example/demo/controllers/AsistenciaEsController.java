@@ -26,10 +26,20 @@ public class AsistenciaEsController {
     @Autowired
     CalificacionService calificacionService;
 
-    //Guardar asistencia estudiante
+    // Descargar Reporte
+    @GetMapping("/descargarreporteestu")
+    public String descargarReporteEs() {
+        if (asEstuService.descargarReporteEs("\\Trabajos\\demo\\src\\main\\files\\ReportesEstudiantes.xlsx")) {
+            return "/files/ReportesEstudiantes.xlsx";
+        } else {
+            return "error no genero reporte";
+        }
+    }
+
+    // Guardar asistencia estudiante
 
     @PostMapping("/guardarasisestudiante")
-    public void guardarAsisEstudiante(@RequestBody VistaGuardarAsisEs vistaGuardarAsisEs){
+    public void guardarAsisEstudiante(@RequestBody VistaGuardarAsisEs vistaGuardarAsisEs) {
 
         AsistenciaEsModel asies = new AsistenciaEsModel();
         CalificacionModel ca = new CalificacionModel();
