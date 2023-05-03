@@ -11,12 +11,15 @@ import com.example.demo.models.asistenciaTuModel;
 import com.example.demo.services.AsistenciaTuService;
 import com.example.demo.views.VistaReporteAsistenciaTu;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @RestController
 @Controller
 @RequestMapping(value = "/asistenciatutor")
+@CrossOrigin(origins = "*")
+
 public class AsistenciaTuController {
     @Autowired
     AsistenciaTuService asTuService;
