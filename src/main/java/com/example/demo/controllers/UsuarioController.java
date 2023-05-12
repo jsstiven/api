@@ -30,6 +30,13 @@ public class UsuarioController {
     Roles_Has_UsuariosService rhuService = new Roles_Has_UsuariosService();
     Roles_Has_UsuariosModel nuevaAsig = new Roles_Has_UsuariosModel();
 
+    // cambiar contraseña
+    
+    @PostMapping("/cambiarcontrasena")
+    public void cambiarContrasena(@RequestBody UsuariosModel usuariosModel){
+       usuarioService.cambiarContrasena(usuariosModel);
+    }
+
     // Listar Tutores
 
     @GetMapping("/listatutores")

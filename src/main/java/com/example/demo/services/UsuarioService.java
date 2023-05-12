@@ -17,6 +17,15 @@ public class UsuarioService {
     @Autowired
     UsuarioRepository usuarioRepository;
 
+    // cambiar contraseña
+    public void cambiarContrasena(UsuariosModel usuariosModel){
+        try {
+            usuarioRepository.cambioContrasena(usuariosModel.getCorreo(), usuariosModel.getContrasena());
+        } catch (Exception e) {
+            System.out.println("no trae consulta");
+        }
+    }
+
     // Listar Tutores
 
     public ArrayList<UsuariosModel> listaTutores() {

@@ -16,6 +16,10 @@ import jakarta.persistence.Tuple;
 @EnableJpaRepositories
 public interface UsuarioRepository extends JpaRepository<UsuariosModel, Integer> {
 
+    //Cambiar la contrasena
+    @Query(value = "UPDATE usuarios set contrasena = :contrasena WHERE correo = :correo", nativeQuery = true)
+    public UsuariosModel cambioContrasena(@Param("correo") String correo, @Param("contrasena") String contrasena );
+
     // listar tutores
     @Query(value = "select rhu.id as id, u.nombres as nombres, u.apellidos as apellidos from usuarios u join roles_has_usuarios rhu ON rhu.usuarios_cc = u.cc where rhu.roles_idroles = 2", nativeQuery = true)
     public ArrayList<Tuple> listarTutores();

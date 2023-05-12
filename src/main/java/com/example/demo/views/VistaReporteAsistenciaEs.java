@@ -12,6 +12,7 @@ public class VistaReporteAsistenciaEs {
     Integer cedulaEstudiante;
     String nombreEstudiante;
     String apellidoEstudiante;
+    String programaAcademico;
     Integer puntuacion;
     String comentarios;
 
@@ -103,4 +104,14 @@ public class VistaReporteAsistenciaEs {
         this.comentarios = comentarios;
     }
 
+    public String getProgramaAcademico() {
+        return programaAcademico;
+    }
+
+    public void setProgramaAcademico(String programaAcademico) {
+        this.programaAcademico = programaAcademico;
+    }
+
+
+    
 }
