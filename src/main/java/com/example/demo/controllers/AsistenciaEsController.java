@@ -42,25 +42,32 @@ public class AsistenciaEsController {
     // Guardar asistencia estudiante
 
     @PostMapping("/guardarasisestudiante")
-    public void guardarAsisEstudiante(@RequestBody VistaGuardarAsisEs vistaGuardarAsisEs) {
+    public String guardarAsisEstudiante(@RequestBody VistaGuardarAsisEs vistaGuardarAsisEs) {
 
         AsistenciaEsModel asies = new AsistenciaEsModel();
         CalificacionModel ca = new CalificacionModel();
+        try {
 
-        asies.setAsignatura(vistaGuardarAsisEs.getAsignatura());
-        asies.setGrupo(vistaGuardarAsisEs.getGrupo());
-        asies.setDia(vistaGuardarAsisEs.getDia());
-        asies.setId_roles_has_usuarios(vistaGuardarAsisEs.getId_roles_has_usuarios());
-        asies.setTema(vistaGuardarAsisEs.getTema());
-        asies.setCcEs(vistaGuardarAsisEs.getCces());
+            asies.setAsignatura(vistaGuardarAsisEs.getAsignatura());
+            asies.setGrupo(vistaGuardarAsisEs.getGrupo());
+            asies.setDia(vistaGuardarAsisEs.getDia());
+            asies.setId_roles_has_usuarios(vistaGuardarAsisEs.getId_roles_has_usuarios());
+            asies.setTema(vistaGuardarAsisEs.getTema());
+            asies.setCcEs(vistaGuardarAsisEs.getCces());
 
-        ca.setPuntuacion(vistaGuardarAsisEs.getPuntuacion());
-        ca.setComentarios(vistaGuardarAsisEs.getComentarios());
-        ca.setCces(vistaGuardarAsisEs.getCces());
-        ca.setId_roles_has_usuarios(vistaGuardarAsisEs.getId_roles_has_usuarios());
+            ca.setPuntuacion(vistaGuardarAsisEs.getPuntuacion());
+            ca.setComentarios(vistaGuardarAsisEs.getComentarios());
+            ca.setCces(vistaGuardarAsisEs.getCces());
+            ca.setId_roles_has_usuarios(vistaGuardarAsisEs.getId_roles_has_usuarios());
 
-        asEstuService.guardarAsistenciaEs(asies);
-        calificacionService.guardarCalificacion(ca);
+            asEstuService.guardarAsistenciaEs(asies);
+            calificacionService.guardarCalificacion(ca);
+
+            return "La asistencia se ha guardado con exito";
+        } catch (Exception e) {
+            System.out.println(e);
+            return "No se pudo guardar la asistencia";
+        }
     }
 
     // Reporte asistencia estudiante

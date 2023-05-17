@@ -87,8 +87,13 @@ public class AsistenciaTuService {
 
     // Guardar asistencia tutor
 
-    public void guardarAsisTutor(asistenciaTuModel asistenciaTuModel) {
-        asistenciaTuRepository.save(asistenciaTuModel);
+    public boolean guardarAsisTutor(asistenciaTuModel asistenciaTuModel) {
+        try {
+            asistenciaTuRepository.save(asistenciaTuModel);   
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     // Reporte asistencia tutores

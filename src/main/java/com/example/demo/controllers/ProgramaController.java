@@ -30,8 +30,14 @@ public class ProgramaController {
     }
     //Guardar programa
     @PostMapping("/GuardarPrograma")
-    public void guardarPrograma(@RequestBody ProgramaModel programaModel){
-        programaService.guardarProgramaAc(programaModel);
+    public String guardarPrograma(@RequestBody ProgramaModel programaModel){
+        try {
+            programaService.guardarProgramaAc(programaModel);   
+            return "El programa se ha guardado con exito";
+        } catch (Exception e) {
+            System.out.println(e);
+            return "No se pudo guardar el programa";
+        }
     }
 
 }

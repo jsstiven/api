@@ -14,6 +14,7 @@ import com.example.demo.views.VistaReporteAsistenciaTu;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 @Controller
@@ -37,8 +38,12 @@ public class AsistenciaTuController {
     // Guardar asistencia Tutor
 
     @PostMapping("/guardarasistencia")
-    public void guardarAsisTutor(asistenciaTuModel asistenciaTuModel) {
-        asTuService.guardarAsisTutor(asistenciaTuModel);
+    public String guardarAsisTutor(@RequestBody asistenciaTuModel asistenciaTuModel) {
+        if(asTuService.guardarAsisTutor(asistenciaTuModel)){
+            return "Se guardo la asistencia";
+        }else{
+            return "Error no guardo la asistencia";
+        }
     }
 
     // Reporte Tutor

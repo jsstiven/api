@@ -17,7 +17,6 @@ import com.example.demo.models.UsuariosModel;
 import com.example.demo.services.Roles_Has_UsuariosService;
 import com.example.demo.services.UsuarioService;
 
-
 @RestController
 @Controller
 @RequestMapping(value = "/usuario")
@@ -31,38 +30,47 @@ public class UsuarioController {
     Roles_Has_UsuariosModel nuevaAsig = new Roles_Has_UsuariosModel();
 
     // cambiar contraseña
-    
+
     @PostMapping("/cambiarcontrasena")
-    public void cambiarContrasena(@RequestBody UsuariosModel usuariosModel){
-       usuarioService.cambiarContrasena(usuariosModel);
+    public void cambiarContrasena(@RequestBody UsuariosModel usuariosModel) {
+        usuarioService.cambiarContrasena(usuariosModel);
     }
 
     // Listar Tutores
 
     @GetMapping("/listatutores")
-    public ArrayList<UsuariosModel> listatutores(){
+    public ArrayList<UsuariosModel> listatutores() {
         return usuarioService.listaTutores();
     }
 
     // Guardar Usuario
     @PostMapping("/guardarusuario")
-    public void guardarUsuarios(@RequestBody UsuariosModel usuariosModel) {
-        nuevaAsig.setId(1);
-        nuevaAsig.setRoles_idroles(1);
-        nuevaAsig.setUsuarios_cc(usuariosModel.getCc());
+    public String guardarUsuarios(@RequestBody UsuariosModel usuariosModel) {
+        try {
 
-        try {
-            usuarioService.guardarUsuarios(usuariosModel);
-            System.out.println(nuevaAsig.getRoles_idroles() + " / " + nuevaAsig.getUsuarios_cc() + " / ");
-            rhuService.guardarAsignacion(nuevaAsig);
+            nuevaAsig.setId(1);
+            nuevaAsig.setRoles_idroles(1);
+            nuevaAsig.setUsuarios_cc(usuariosModel.getCc());
+
+            try {
+                usuarioService.guardarUsuarios(usuariosModel);
+                System.out.println(nuevaAsig.getRoles_idroles() + " / " + nuevaAsig.getUsuarios_cc() + " / ");
+                rhuService.guardarAsignacion(nuevaAsig);
+            } catch (Exception e) {
+                System.out.println("error de no traer consulta");
+            }
+            try {
+                System.out.println(nuevaAsig.getRoles_idroles() + " / " + nuevaAsig.getUsuarios_cc() + " / ");
+                rhuService.guardarAsignacion(nuevaAsig);
+            } catch (Exception e) {
+                System.out.println("error de no traer consulta");
+            }
+
+            return "Usuario guardado con exito";
+
         } catch (Exception e) {
-            System.out.println("error de no traer consulta");
-        }
-        try {
-            System.out.println(nuevaAsig.getRoles_idroles() + " / " + nuevaAsig.getUsuarios_cc() + " / ");
-            rhuService.guardarAsignacion(nuevaAsig);
-        } catch (Exception e) {
-            System.out.println("error de no traer consulta");
+            System.out.println(e);
+            return "No se guardo el usuario";
         }
 
     }

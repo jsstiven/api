@@ -29,36 +29,58 @@ public class AgendacionController {
 
     // Guardar agendacion
     @PostMapping("/guardaragenda/query")
-    public void guaradarAgenda(@RequestBody AgendacionModel agendacionModel,
+    public String guaradarAgenda(@RequestBody AgendacionModel agendacionModel,
             @RequestParam("cedulatu") Integer idtutor) {
-
-        agendacionService.guardarAgendacion(agendacionModel);
         try {
-            agrhuService.guardarAsigAgenda(idtutor);
+            agendacionService.guardarAgendacion(agendacionModel);
+            try {
+                agrhuService.guardarAsigAgenda(idtutor);
+            } catch (Exception e) {
+                System.out.println("no trae consulta");
+            }
+
+            return "Agendacion guardada con exito";
         } catch (Exception e) {
-            System.out.println("no trae consulta");
+            System.out.println(e);
+            return "No se pudo guardar la agendacion";
         }
 
     }
 
     // Editar hora agendacion
     @PostMapping("/editaragenda")
-    public void editarAgenda(@RequestBody AgendacionModel agendacionModel) {
+    public String editarAgenda(@RequestBody AgendacionModel agendacionModel) {
         try {
-            agendacionService.editarAgenda(agendacionModel);
+            try {
+                agendacionService.editarAgenda(agendacionModel);
+            } catch (Exception e) {
+                System.out.println("no traer consulta");
+            }
+
+            return "Se ha editado la agendacion con exito";
+                
         } catch (Exception e) {
-            System.out.println("no traer consulta");
+            System.out.println(e);
+            return "No se pudo editar la agendacion";
         }
     }
 
     // Cancelar o maracar realizada tutoria agendada
     @PostMapping("/cancelartutoria")
-    public void cancelarTutoria(@RequestBody AgendacionModel agendacionModel) {
+    public String cancelarTutoria(@RequestBody AgendacionModel agendacionModel) {
         try {
-            agendacionService.cancelarTutoria(agendacionModel);
+            try {
+                agendacionService.cancelarTutoria(agendacionModel);
+            } catch (Exception e) {
+                System.out.println("no traer consulta");
+            }
+            
+            return "Se ha cancelado la Tutoria con exito";
         } catch (Exception e) {
-            System.out.println("no traer consulta");
+            System.out.println(e);
+            return "Nose pudo cancelar la tutoria";
         }
+        
     }
 
     // Reporte asistencia estudiante
