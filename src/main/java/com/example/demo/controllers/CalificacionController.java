@@ -4,10 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.services.CalificacionService;
+import com.example.demo.views.VistaGuardarAsisEs;
 
 
 @RestController
@@ -24,9 +27,9 @@ public class CalificacionController {
         return calificacionService.listarDiario();
     }
 
-    @GetMapping("/listamensual")
-    public String listarCalificacionMensual(){
-        return calificacionService.listarMensual();
+    @PostMapping("/listamensual")
+    public String listarCalificacionMensual(@RequestBody VistaGuardarAsisEs vistaGuardarAsisEs){
+        return calificacionService.listarMensual(vistaGuardarAsisEs.getId_roles_has_usuarios());
     }
 
 }

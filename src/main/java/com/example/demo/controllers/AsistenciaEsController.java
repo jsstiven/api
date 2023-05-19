@@ -32,8 +32,8 @@ public class AsistenciaEsController {
     // Descargar Reporte
     @GetMapping("/descargarreporteestu")
     public String descargarReporteEs() {
-        if (asEstuService.descargarReporteEs("\\Trabajos\\demo\\src\\main\\files\\ReportesEstudiantes.xlsx")) {
-            return "/files/ReportesEstudiantes.xlsx";
+        if (asEstuService.descargarReporteEs("C:\\Users\\USUARIO\\Downloads\\ReportesEstudiantes.xlsx")) {
+            return "C:/Users/USUARIO/Downloads/ReportesEstudiantes.xlsx";
         } else {
             return "error no genero reporte";
         }
@@ -61,8 +61,13 @@ public class AsistenciaEsController {
             ca.setId_roles_has_usuarios(vistaGuardarAsisEs.getId_roles_has_usuarios());
 
             asEstuService.guardarAsistenciaEs(asies);
-            calificacionService.guardarCalificacion(ca);
+            try {
 
+                calificacionService.guardarCalificacion(ca);
+
+            } catch (Exception e) {
+                System.out.println("no trae consulta");    
+            }
             return "La asistencia se ha guardado con exito";
         } catch (Exception e) {
             System.out.println(e);

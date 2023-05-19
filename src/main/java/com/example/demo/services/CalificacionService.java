@@ -17,7 +17,7 @@ public class CalificacionService {
     //Guardar Calificacion
 
     public void guardarCalificacion(CalificacionModel calificacionModel){
-        calificacionRepositry.save(calificacionModel);
+        calificacionRepositry.guardarCalificacion(calificacionModel.getComentarios(), calificacionModel.getPuntuacion(), calificacionModel.getCces(), calificacionModel.getId_roles_has_usuarios());
     }
 
     //listar calificacion 
@@ -29,8 +29,8 @@ public class CalificacionService {
 
     //listar calificacion 
 
-    public String listarMensual(){
-        JSONArray arrayjs = new JSONArray(calificacionRepositry.listarCalificacionMensual());
+    public String listarMensual(Integer rhuid){
+        JSONArray arrayjs = new JSONArray(calificacionRepositry.listarCalificacionMensual(rhuid));
         return arrayjs.toString();
     }
 }

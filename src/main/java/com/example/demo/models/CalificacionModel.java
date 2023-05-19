@@ -19,6 +19,7 @@ public class CalificacionModel {
     private Integer puntuacion;
     private Integer cces;
     private Integer id_roles_has_usuarios;
+    private Integer idasistenciases;
 
     public Integer getIdcalificacion() {
         return idcalificacion;
@@ -59,5 +60,15 @@ public class CalificacionModel {
     public void setId_roles_has_usuarios(Integer id_roles_has_usuarios) {
         this.id_roles_has_usuarios = id_roles_has_usuarios;
     }
+
+    public Integer getIdasistenciases() {
+        return idasistenciases;
+    }
+
+    public void setIdasistenciases(Integer idasistenciases) {
+        this.idasistenciases = idasistenciases;
+    }
+
+    
 
 }
