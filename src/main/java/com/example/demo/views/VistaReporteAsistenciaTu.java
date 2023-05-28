@@ -1,64 +1,71 @@
 package com.example.demo.views;
 
-import java.sql.Date;
-import java.sql.Time;
-
 public class VistaReporteAsistenciaTu {
-    
-    String nombres;
-    String apellidos;
-    Integer cedula;
-    Time entrada;
-    Time salida;
-    Date fecha;
 
-    public String getNombres() {
-        return nombres;
+    private String dia;
+    // private String fecha;
+    private String horaEntrada1;
+    private String horaSalida1;
+    private String horaEntrada2;
+    private String horaSalida2;
+    private String nombreTutor;
+
+    public String getDia() {
+        return dia;
     }
 
-    public void setNombres(String nombres) {
-        this.nombres = nombres;
+    public void setDia(String dia) {
+        this.dia = dia;
     }
 
-    public String getApellidos() {
-        return apellidos;
+    /*
+     * public String getFecha() {
+     * return fecha;
+     * }
+     * 
+     * public void setFecha(String fecha) {
+     * this.fecha = fecha;
+     * }
+     */
+
+    public String getHoraEntrada1() {
+        return horaEntrada1;
     }
 
-    public void setApellidos(String apellidos) {
-        this.apellidos = apellidos;
+    public void setHoraEntrada1(String horaEntrada1) {
+        this.horaEntrada1 = horaEntrada1;
     }
 
-    public Integer getCedula() {
-        return cedula;
+    public String getHoraSalida1() {
+        return horaSalida1;
     }
 
-    public void setCedula(Integer cedula) {
-        this.cedula = cedula;
+    public void setHoraSalida1(String horaSalida1) {
+        this.horaSalida1 = horaSalida1;
     }
 
-    public Time getEntrada() {
-        return entrada;
+    public String getHoraEntrada2() {
+        return horaEntrada2;
     }
 
-    public void setEntrada(Time entrada) {
-        this.entrada = entrada;
+    public void setHoraEntrada2(String horaEntrada2) {
+        this.horaEntrada2 = horaEntrada2;
     }
 
-    public Time getSalida() {
-        return salida;
+    public String getHoraSalida2() {
+        return horaSalida2;
     }
 
-    public void setSalida(Time salida) {
-        this.salida = salida;
+    public void setHoraSalida2(String horaSalida2) {
+        this.horaSalida2 = horaSalida2;
     }
 
-    public Date getFecha() {
-        return fecha;
+    public String getNombreTutor() {
+        return nombreTutor;
     }
 
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
+    public void setNombreTutor(String nombreTutor) {
+        this.nombreTutor = nombreTutor;
     }
 
-    
 }

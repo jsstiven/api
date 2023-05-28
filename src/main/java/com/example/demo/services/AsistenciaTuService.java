@@ -6,11 +6,14 @@ import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.streaming.SXSSFSheet;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +30,7 @@ public class AsistenciaTuService {
     AsistenciaTuRepository asistenciaTuRepository;
 
     // Descargar Reporte
+
     public boolean DescargarReporteTu(String fileName) {
 
         List<VistaReporteAsistenciaTu> datos = this.reporteAsisTu();
@@ -40,7 +44,8 @@ public class AsistenciaTuService {
 
             // GENERAR CABECERA
 
-            Object[] cabecera = { "Nombres", "Apellidos", "Cedula", "Entrada", "Salida", "Fecha" };
+            Object[] cabecera = { "Dia", "Hora Entrada 1", "Hora Salida 1", "Hora Entrada 2", "Hora Salida 2",
+                    "Nombres Tutor" };
             nRow = sheet.createRow(0);
             for (int i = 0; i < cabecera.length; i++) {
                 nCell = nRow.createCell(i);
@@ -55,12 +60,12 @@ public class AsistenciaTuService {
                 VistaReporteAsistenciaTu bodyExcel = it.next();
                 Object[] bodyExcel2 = new Object[6];
 
-                bodyExcel2[0] = bodyExcel.getNombres();
-                bodyExcel2[1] = bodyExcel.getApellidos();
-                bodyExcel2[2] = bodyExcel.getCedula();
-                bodyExcel2[3] = bodyExcel.getEntrada();
-                bodyExcel2[4] = bodyExcel.getSalida();
-                bodyExcel2[5] = bodyExcel.getFecha();
+                bodyExcel2[0] = bodyExcel.getDia();
+                bodyExcel2[1] = bodyExcel.getHoraEntrada1();
+                bodyExcel2[2] = bodyExcel.getHoraSalida1();
+                bodyExcel2[3] = bodyExcel.getHoraEntrada2();
+                bodyExcel2[4] = bodyExcel.getHoraSalida2();
+                bodyExcel2[5] = bodyExcel.getNombreTutor();
 
                 nRow = sheet.createRow(pageRow++);
 
@@ -87,33 +92,73 @@ public class AsistenciaTuService {
 
     // Guardar asistencia tutor
 
-    public boolean guardarAsisTutor(asistenciaTuModel asistenciaTuModel) {
-        try {
-            asistenciaTuRepository.save(asistenciaTuModel);   
-            return true;
-        } catch (Exception e) {
-            return false;
+    public void guardarAsisTutor(asistenciaTuModel asistenciaTuModel) {
+        String caracteres = asistenciaTuModel.getDatos().toString();
+        char[] caracter = new char[asistenciaTuModel.getDatos().toString().length()];
+        String datofinal = "";
+        for (int i = 0; i < caracter.length; i++) {
+            if (caracteres.charAt(i) == '=') {
+                caracter[i] = ':';
+            } else {
+                caracter[i] = caracteres.charAt(i);
+            }
         }
+        for (int i = 0; i < caracter.length; i++) {
+            datofinal = datofinal + caracter[i];
+        }
+
+        asistenciaTuRepository.guaradarAsistenciaTu(datofinal, asistenciaTuModel.getId_roles_has_usuarios());
+
     }
 
     // Reporte asistencia tutores
 
-    public ArrayList<VistaReporteAsistenciaTu> reporteAsisTu() {
+    public ArrayList<VistaReporteAsistenciaTu> reporteAsisTu() throws NoSuchElementException {
+
+        JSONArray arrayjs = new JSONArray(asistenciaTuRepository.reporteBecarios());
         ArrayList<VistaReporteAsistenciaTu> dato = new ArrayList<VistaReporteAsistenciaTu>();
         VistaReporteAsistenciaTu asiTu = new VistaReporteAsistenciaTu();
 
-        for (Tuple i : asistenciaTuRepository.reporteBecarios()) {
+        for (int i = 0; i < arrayjs.length(); i++) {
 
-            asiTu.setNombres((String) i.get("nombres"));
-            asiTu.setApellidos((String) i.get("apellidos"));
-            asiTu.setCedula((Integer) i.get("cedula"));
-            asiTu.setEntrada((Time) i.get("entrada"));
-            asiTu.setSalida((Time) i.get("salida"));
-            asiTu.setFecha((Date) i.get("fecha"));
+            JSONObject obj = arrayjs.getJSONObject(i);
+
+            JSONObject obj1 = (JSONObject) obj.get("datos");
+
+            String[] c = obj1.keySet().toArray(new String[obj1.keySet().size()]);
+
+            for (int j = 0; j < c.length; j++) {
+
+                if (c[j] == "horaEntrada1") {
+
+                    asiTu.setHoraEntrada1(obj1.get(c[j]).toString());
+
+                } else if (c[j] == "horaSalida1") {
+
+                    asiTu.setHoraSalida1(obj1.get(c[j]).toString());
+
+                } else if (c[j] == "horaEntrada2") {
+
+                    asiTu.setHoraEntrada2(obj1.get(c[j]).toString());
+
+                } else if (c[j] == "horaSalida2") {
+
+                    asiTu.setHoraSalida2(obj1.get(c[j]).toString());
+
+                } else if (c[j] == "dia") {
+
+                    asiTu.setDia(obj1.get(c[j]).toString());
+
+                }
+                // System.out.println(obj1.get(c[j]));
+            }
+
+            asiTu.setNombreTutor(obj.get("nombre_tutor").toString());
 
             dato.add(asiTu);
 
             asiTu = new VistaReporteAsistenciaTu();
+
         }
 
         return dato;

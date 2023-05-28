@@ -13,7 +13,7 @@ import com.example.demo.models.CalificacionModel;
 
 @Repository
 @EnableJpaRepositories
-public interface CalificacionRepositry extends JpaRepository<CalificacionModel, Integer> {
+public interface CalificacionRepository extends JpaRepository<CalificacionModel, Integer> {
 
     @Query(value = "insert into public.calificacion(comentarios, puntuacion, cces, id_roles_has_usuarios, idasistenciases) values (:comentarios, :puntuacion, :cedulaes, :rhu, (select max(es.idasistenciases) from asistenciases es))", nativeQuery = true)
     public void guardarCalificacion(@Param("comentarios") String comentarios, @Param("puntuacion") Integer puntuacion,

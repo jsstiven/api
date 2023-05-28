@@ -8,14 +8,15 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "horarios")
-public class HorariosModel {
+@Table(name = "asignaturas")
+public class AsignaturasModel {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, nullable = false)
     private Integer id;
 
-    private Object datos;
+    private String nombreasignatura;
 
     public Integer getId() {
         return id;
@@ -25,13 +26,12 @@ public class HorariosModel {
         this.id = id;
     }
 
-    public Object getDatos() {
-        return datos.toString();
+    public String getNombreasignatura() {
+        return nombreasignatura;
     }
 
-    public void setDatos(Object datos) {
-        this.datos = datos;
+    public void setNombreasignatura(String nombreasignatura) {
+        this.nombreasignatura = nombreasignatura;
     }
 
-    
 }

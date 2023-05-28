@@ -26,12 +26,14 @@ public class AsistenciaTuController {
     AsistenciaTuService asTuService;
 
     // Descargar Reporte
+
     @GetMapping("/descargarreportetutor")
     public String descargarReporteEs() {
-        if (asTuService.DescargarReporteTu("\\Trabajos\\demo\\src\\main\\files\\ReportesTutores.xlsx")) {
-            return "/files/ReportesTutores.xlsx";
+        if (asTuService.DescargarReporteTu(
+                "C:\\Users\\USUARIO\\Downloads\\ReportesTutores.xlsx")) {
+            return "C:/Users/USUARIO/Downloads/ReportesTutores.xlsx";
         } else {
-            return "error no genero reporte";
+            return "Error no genero reporte";
         }
     }
 
@@ -39,9 +41,17 @@ public class AsistenciaTuController {
 
     @PostMapping("/guardarasistencia")
     public String guardarAsisTutor(@RequestBody asistenciaTuModel asistenciaTuModel) {
-        if(asTuService.guardarAsisTutor(asistenciaTuModel)){
+
+        try {
+            System.out.println(asistenciaTuModel.getId_roles_has_usuarios());
+            System.out.println(asistenciaTuModel.getDatos().toString());
+            try {
+                asTuService.guardarAsisTutor(asistenciaTuModel);
+            } catch (Exception e) {
+                System.out.println("no trae consulta");
+            }
             return "Se guardo la asistencia";
-        }else{
+        } catch (Exception e) {
             return "Error no guardo la asistencia";
         }
     }
