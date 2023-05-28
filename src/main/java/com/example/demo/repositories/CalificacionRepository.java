@@ -22,7 +22,7 @@ public interface CalificacionRepository extends JpaRepository<CalificacionModel,
     @Query(value = "select json_build_object('Promedio', cast(sum(ca.puntuacion) as decimal)/cast(count(ca.puntuacion) as decimal), 'Fecha', es.dia, 'Nombres', CONCAT(u.nombres, ' ', u.apellidos) ) from calificacion ca join asistenciases es ON es.idasistenciases = ca.idasistenciases join roles_has_usuarios ON roles_has_usuarios.id = es.id_roles_has_usuarios join usuarios u ON u.cc = roles_has_usuarios.usuarios_cc group by es.dia, es.id_roles_has_usuarios, u.nombres, u.apellidos", nativeQuery = true)
     public List<Object> listarCalificacionDiaria() throws JSONException;
 
-    @Query(value = "select json_build_object('Promedio', cast(sum(ca.puntuacion) as float)/cast(count(ca.puntuacion) as float), 'Mes', to_char(es.dia, 'TMMonth')) from calificacion ca join asistenciases es ON es.idasistenciases = ca.idasistenciases where ca.id_roles_has_usuarios = :idtutor group by to_char(es.dia, 'TMMonth'), es.id_roles_has_usuarios", nativeQuery = true)
+    @Query(value = "select json_build_object('Promedio', cast(sum(ca.puntuacion) as float)/cast(count(ca.puntuacion) as float), 'Mes', to_char(es.dia, 'TMMonth'),'Asignatura',es.asignatura) from calificacion ca join asistenciases es ON es.idasistenciases = ca.idasistenciases where ca.id_roles_has_usuarios = :idtutor group by to_char(es.dia, 'TMMonth'), es.id_roles_has_usuarios,es.asignatura", nativeQuery = true)
     public List<Object> listarCalificacionMensual(@Param("idtutor") Integer idTutor) throws JSONException;
 
 }
