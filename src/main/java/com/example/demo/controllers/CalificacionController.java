@@ -32,4 +32,9 @@ public class CalificacionController {
         return calificacionService.listarMensual(vistaGuardarAsisEs.getId_roles_has_usuarios());
     }
 
+    @PostMapping("/listamensualasig")
+    public String listarCalificacionMensualAsignatura(@RequestBody VistaGuardarAsisEs vistaGuardarAsisEs){
+        return calificacionService.listarMensualAsignatura(vistaGuardarAsisEs.getId_roles_has_usuarios(), vistaGuardarAsisEs.getAsignatura());
+    }
+
 }

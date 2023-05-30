@@ -33,4 +33,11 @@ public class CalificacionService {
         JSONArray arrayjs = new JSONArray(calificacionRepositry.listarCalificacionMensual(rhuid));
         return arrayjs.toString();
     }
+    
+    // listar calificacion mensual con asignatura
+
+    public String listarMensualAsignatura(Integer rhuid, String asignatura) {
+        JSONArray arrayjs = new JSONArray(calificacionRepositry.listarCalificacionMensualAsignatura(rhuid, asignatura));
+        return arrayjs.toString();
+    }
 }
