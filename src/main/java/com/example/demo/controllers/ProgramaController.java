@@ -2,6 +2,7 @@ package com.example.demo.controllers;
 
 import java.util.ArrayList;
 
+import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -23,16 +24,24 @@ public class ProgramaController {
     @Autowired
     ProgramaService programaService;
 
-    //Listar programa
+    // Listar programa
     @GetMapping("/listarPrograma")
-    public ArrayList<ProgramaModel> obtenerPrograma() {
-        return programaService.buscarPrograma();
+    public String obtenerPrograma() {
+        ArrayList<ProgramaModel> dato = programaService.buscarPrograma();
+        JSONArray arrayjs = new JSONArray(dato.toArray());
+
+        if (!arrayjs.toString().isEmpty()) {
+            return arrayjs.toString();
+        } else {
+            return "No hay informacion";
+        }
     }
-    //Guardar programa
+
+    // Guardar programa
     @PostMapping("/GuardarPrograma")
-    public String guardarPrograma(@RequestBody ProgramaModel programaModel){
+    public String guardarPrograma(@RequestBody ProgramaModel programaModel) {
         try {
-            programaService.guardarProgramaAc(programaModel);   
+            programaService.guardarProgramaAc(programaModel);
             return "El programa se ha guardado con exito";
         } catch (Exception e) {
             System.out.println(e);

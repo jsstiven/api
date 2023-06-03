@@ -1,8 +1,6 @@
 package com.example.demo.services;
 
 import java.io.FileOutputStream;
-import java.sql.Date;
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -21,7 +19,7 @@ import com.example.demo.models.asistenciaTuModel;
 import com.example.demo.repositories.AsistenciaTuRepository;
 import com.example.demo.views.VistaReporteAsistenciaTu;
 
-import jakarta.persistence.Tuple;
+
 
 @Service
 
@@ -71,7 +69,11 @@ public class AsistenciaTuService {
 
                 for (int i = 0; i < bodyExcel2.length; i++) {
                     nCell = nRow.createCell(i);
-                    nCell.setCellValue(bodyExcel2[i].toString());
+                    if(bodyExcel2[i] != null){                    
+                        nCell.setCellValue(bodyExcel2[i].toString());   
+                    }else{
+                        nCell.setCellValue("");
+                    }
                 }
 
             }
@@ -86,6 +88,7 @@ public class AsistenciaTuService {
 
             return true;
         } catch (Exception e) {
+            System.out.println(e);
             return false;
         }
     }
@@ -107,7 +110,7 @@ public class AsistenciaTuService {
             datofinal = datofinal + caracter[i];
         }
 
-        asistenciaTuRepository.guaradarAsistenciaTu(datofinal, asistenciaTuModel.getId_roles_has_usuarios());
+        asistenciaTuRepository.guaradarAsistenciaTu(datofinal, asistenciaTuModel.getId_roles_has_usuarios(), asistenciaTuModel.getFecha());
 
     }
 
@@ -150,10 +153,10 @@ public class AsistenciaTuService {
                     asiTu.setDia(obj1.get(c[j]).toString());
 
                 }
-                // System.out.println(obj1.get(c[j]));
             }
 
             asiTu.setNombreTutor(obj.get("nombre_tutor").toString());
+            asiTu.setFecha(obj.get("fecha").toString());
 
             dato.add(asiTu);
 
@@ -163,4 +166,18 @@ public class AsistenciaTuService {
 
         return dato;
     }
+
+    // Reporte asistencia tutores
+
+    public String listaAsisTu() {
+
+        JSONArray arrayjs = new JSONArray(asistenciaTuRepository.reporteBecarios());
+        if(!arrayjs.toString().isEmpty()){
+            return arrayjs.toString();
+        }else{
+            return "No se encontro registros";
+        }
+
+    }
+
 }

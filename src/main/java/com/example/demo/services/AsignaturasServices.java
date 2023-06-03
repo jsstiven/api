@@ -32,4 +32,14 @@ public class AsignaturasServices {
         return dato;
     }
 
+    // crear asignatura
+
+    public void crearAsignatura(AsignaturasModel asignaturasModel) {
+        try {
+            asignaturasRepository.guardarAsignaturas(asignaturasModel.getNombreasignatura());   
+        } catch (Exception e) {
+            System.out.println("no trae consulta");
+        }
+    }
+
 }

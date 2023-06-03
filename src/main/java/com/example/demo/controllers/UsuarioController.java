@@ -2,6 +2,7 @@ package com.example.demo.controllers;
 
 import java.util.ArrayList;
 
+import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -39,8 +40,14 @@ public class UsuarioController {
     // Listar Tutores
 
     @GetMapping("/listatutores")
-    public ArrayList<UsuariosModel> listatutores() {
-        return usuarioService.listaTutores();
+    public String listatutores() {
+        ArrayList<UsuariosModel> dato = usuarioService.listaTutores();
+        JSONArray arrayjs = new JSONArray(dato.toArray());
+        if (!arrayjs.toString().isEmpty()) {
+            return arrayjs.toString();
+        } else {
+            return "No hay registros";
+        }
     }
 
     // Guardar Usuario

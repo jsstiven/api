@@ -3,7 +3,7 @@ package com.example.demo.views;
 public class VistaReporteAsistenciaTu {
 
     private String dia;
-    // private String fecha;
+    private String fecha;
     private String horaEntrada1;
     private String horaSalida1;
     private String horaEntrada2;
@@ -18,15 +18,13 @@ public class VistaReporteAsistenciaTu {
         this.dia = dia;
     }
 
-    /*
-     * public String getFecha() {
-     * return fecha;
-     * }
-     * 
-     * public void setFecha(String fecha) {
-     * this.fecha = fecha;
-     * }
-     */
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
 
     public String getHoraEntrada1() {
         return horaEntrada1;

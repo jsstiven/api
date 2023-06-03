@@ -62,4 +62,9 @@ public class AsistenciaTuController {
         return asTuService.reporteAsisTu();
     }
 
+    // Reporte Tutor
+    @GetMapping("/listartutor")
+    public String listarTutor() {
+        return asTuService.listaAsisTu();
+    }
 }

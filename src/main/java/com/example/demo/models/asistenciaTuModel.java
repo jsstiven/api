@@ -1,5 +1,7 @@
 package com.example.demo.models;
 
+import java.util.Date;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -16,6 +18,7 @@ public class asistenciaTuModel {
     private Integer idasistenciatu;
 
     private Object datos;
+    private Date fecha;
     private Integer id_roles_has_usuarios;
 
     public Integer getIdasistenciatu() {
@@ -42,4 +45,14 @@ public class asistenciaTuModel {
         this.datos = datos;
     }
 
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
+
+
+    
 }

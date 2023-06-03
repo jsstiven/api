@@ -1,7 +1,6 @@
 package com.example.demo.controllers;
 
-import java.util.ArrayList;
-
+import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.models.AgendacionModel;
 import com.example.demo.services.AgendacionService;
 import com.example.demo.services.Agendacion_Has_Roles_Has_UsuariosService;
-import com.example.demo.views.VistaAgendas;
 
 @RestController
 @Controller
@@ -58,7 +56,7 @@ public class AgendacionController {
             }
 
             return "Se ha editado la agendacion con exito";
-                
+
         } catch (Exception e) {
             System.out.println(e);
             return "No se pudo editar la agendacion";
@@ -74,18 +72,23 @@ public class AgendacionController {
             } catch (Exception e) {
                 System.out.println("no traer consulta");
             }
-            
+
             return "Se ha cancelado la Tutoria con exito";
         } catch (Exception e) {
             System.out.println(e);
             return "Nose pudo cancelar la tutoria";
         }
-        
+
     }
 
     // Reporte asistencia estudiante
     @GetMapping("/reporteagendacion")
-    public ArrayList<VistaAgendas> reporteEstudiante() {
-        return agendacionService.reporteAgendas();
+    public String reporteEstudiante() {
+        JSONArray arrayjs = new JSONArray(agendacionService.reporteAgendas());
+        if (!arrayjs.toString().isEmpty()) {
+            return arrayjs.toString();
+        } else {
+            return "No se encontro registros";
+        }
     }
 }
