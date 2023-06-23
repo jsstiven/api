@@ -25,7 +25,7 @@ public interface AgendacionRepository extends JpaRepository<AgendacionModel, Int
     AgendacionModel editarAgenda(@Param("fecha") Date fecha, @Param("hora") Time hora,
             @Param("idAgendacion") Integer idAgendacion);
 
-    @Query(value = "select ag.idagendacion as idagendacion, u.cc as cedula, u.nombres as nombres, u.apellidos as apellidos, ag.tema as tema, ag.fecha as fecha, ag.hora as hora from agendacion ag join agendacion_has_roles_has_usuarios agrhu ON agrhu.agendacion_idagendacion = ag.idagendacion join roles_has_usuarios rhu ON rhu.id = agrhu.roles_has_usuarios join usuarios u ON u.cc = rhu.usuarios_cc where ag.activo = '1'", nativeQuery = true)
+    @Query(value = "select ag.idagendacion as idagendacion, u.cc as cedulatutor, CONCAT(u.nombres, ' ', u.apellidos) AS nombretutor, (select cc from usuarios where cc = ag.cces) as cedulaestudiante, (select CONCAT(nombres, ' ', apellidos) from usuarios where cc = ag.cces) as nombreestudiante, ag.tema as tema, ag.fecha as fecha, ag.hora as hora from agendacion ag join agendacion_has_roles_has_usuarios agrhu ON agrhu.agendacion_idagendacion = ag.idagendacion join roles_has_usuarios rhu ON rhu.id = agrhu.roles_has_usuarios join usuarios u ON u.cc = rhu.usuarios_cc where ag.activo = '1'", nativeQuery = true)
     ArrayList<Tuple> reporteAgendacion();
 
 }

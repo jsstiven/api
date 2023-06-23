@@ -3,18 +3,33 @@ package com.example.demo.views;
 import java.sql.Date;
 
 public class VistaReporteAsistenciaEs {
+    Integer cedulaTutor;
     Integer cedula;
-    String nombres;
-    String apellidos;
+    String nombresTutor;
     String asignatura;
     String tema;
     Date fecha;
     Integer cedulaEstudiante;
-    String nombreEstudiante;
-    String apellidoEstudiante;
+    String nombresEstudiante;
     String programaAcademico;
     Integer puntuacion;
     String comentarios;
+
+    public String getNombresTutor() {
+        return nombresTutor;
+    }
+
+    public void setNombresTutor(String nombresTutor) {
+        this.nombresTutor = nombresTutor;
+    }
+
+    public String getNombresEstudiante() {
+        return nombresEstudiante;
+    }
+
+    public void setNombresEstudiante(String nombresEstudiante) {
+        this.nombresEstudiante = nombresEstudiante;
+    }
 
     public Integer getCedula() {
         return cedula;
@@ -22,22 +37,6 @@ public class VistaReporteAsistenciaEs {
 
     public void setCedula(Integer cedula) {
         this.cedula = cedula;
-    }
-
-    public String getNombres() {
-        return nombres;
-    }
-
-    public void setNombres(String nombres) {
-        this.nombres = nombres;
-    }
-
-    public String getApellidos() {
-        return apellidos;
-    }
-
-    public void setApellidos(String apellidos) {
-        this.apellidos = apellidos;
     }
 
     public String getAsignatura() {
@@ -72,22 +71,6 @@ public class VistaReporteAsistenciaEs {
         this.cedulaEstudiante = cedulaEstudiante;
     }
 
-    public String getNombreEstudiante() {
-        return nombreEstudiante;
-    }
-
-    public void setNombreEstudiante(String nombreEstudiante) {
-        this.nombreEstudiante = nombreEstudiante;
-    }
-
-    public String getApellidoEstudiante() {
-        return apellidoEstudiante;
-    }
-
-    public void setApellidoEstudiante(String apellidoEstudiante) {
-        this.apellidoEstudiante = apellidoEstudiante;
-    }
-
     public Integer getPuntuacion() {
         return puntuacion;
     }
@@ -112,6 +95,12 @@ public class VistaReporteAsistenciaEs {
         this.programaAcademico = programaAcademico;
     }
 
+    public Integer getCedulaTutor() {
+        return cedulaTutor;
+    }
 
-    
+    public void setCedulaTutor(Integer cedulaTutor) {
+        this.cedulaTutor = cedulaTutor;
+    }
+
 }

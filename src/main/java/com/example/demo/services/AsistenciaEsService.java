@@ -37,8 +37,8 @@ public class AsistenciaEsService {
 
             // GENERAR CABECERA
 
-            Object[] cabecera = { "Cedula", "Nombres", "Apellidos", "Asignatura", "Tema", "Fecha", "Cedula Estudiante",
-                    "Nombre Estudiante", "Apellido Estudiante", "Programa Academico", "Puntuacion", "Comentarios" };
+            Object[] cabecera = { "Cedula Tutor", "Nombres Tutor", "Asignatura", "Tema", "Fecha", "Cedula Estudiante",
+                    "Nombres Estudiante", "Programa Academico", "Puntuacion", "Comentarios" };
             nRow = sheet.createRow(0);
             for (int i = 0; i < cabecera.length; i++) {
                 nCell = nRow.createCell(i);
@@ -51,20 +51,18 @@ public class AsistenciaEsService {
             int pageRow = 1;
             while (it.hasNext()) {
                 VistaReporteAsistenciaEs bodyExcel = it.next();
-                Object[] bodyExcel2 = new Object[12];
+                Object[] bodyExcel2 = new Object[10];
 
-                bodyExcel2[0] = bodyExcel.getCedula();
-                bodyExcel2[1] = bodyExcel.getNombres();
-                bodyExcel2[2] = bodyExcel.getApellidos();
-                bodyExcel2[3] = bodyExcel.getAsignatura();
-                bodyExcel2[4] = bodyExcel.getTema();
-                bodyExcel2[5] = bodyExcel.getFecha();
-                bodyExcel2[6] = bodyExcel.getCedulaEstudiante();
-                bodyExcel2[7] = bodyExcel.getNombreEstudiante();
-                bodyExcel2[8] = bodyExcel.getApellidoEstudiante();
-                bodyExcel2[9] = bodyExcel.getProgramaAcademico();
-                bodyExcel2[10] = bodyExcel.getPuntuacion();
-                bodyExcel2[11] = bodyExcel.getComentarios();
+                bodyExcel2[0] = bodyExcel.getCedulaTutor();
+                bodyExcel2[1] = bodyExcel.getNombresTutor();
+                bodyExcel2[2] = bodyExcel.getAsignatura();
+                bodyExcel2[3] = bodyExcel.getTema();
+                bodyExcel2[4] = bodyExcel.getFecha();
+                bodyExcel2[5] = bodyExcel.getCedulaEstudiante();
+                bodyExcel2[6] = bodyExcel.getNombresEstudiante();
+                bodyExcel2[7] = bodyExcel.getProgramaAcademico();
+                bodyExcel2[8] = bodyExcel.getPuntuacion();
+                bodyExcel2[9] = bodyExcel.getComentarios();
 
                 nRow = sheet.createRow(pageRow++);
 
@@ -102,15 +100,14 @@ public class AsistenciaEsService {
 
         for (Tuple i : asistenciaEsRepository.reporteAsisEstudiantes()) {
 
+            asiEstu.setCedulaTutor((Integer) i.get("cedulatutor"));
             asiEstu.setCedula((Integer) i.get("cedula"));
-            asiEstu.setNombres((String) i.get("nombres"));
-            asiEstu.setApellidos((String) i.get("apellidos"));
+            asiEstu.setNombresTutor((String) i.get("nombresTutor"));
             asiEstu.setAsignatura((String) i.get("asignatura"));
             asiEstu.setTema((String) i.get("tema"));
             asiEstu.setFecha((Date) i.get("fecha"));
             asiEstu.setCedulaEstudiante((Integer) i.get("cedulaEstudiante"));
-            asiEstu.setNombreEstudiante((String) i.get("nombreEstudiante"));
-            asiEstu.setApellidoEstudiante((String) i.get("apellidoEstudiante"));
+            asiEstu.setNombresEstudiante((String) i.get("nombresEstudiante"));
             asiEstu.setProgramaAcademico((String) i.get("programaAcademico"));
             asiEstu.setPuntuacion((Integer) i.get("puntuacion"));
             asiEstu.setComentarios((String) i.get("comentarios"));

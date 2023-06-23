@@ -35,7 +35,7 @@ public class AsistenciaEsController {
         if (asEstuService.descargarReporteEs("C:\\Users\\USUARIO\\Downloads\\ReportesEstudiantes.xlsx")) {
             return "C:/Users/USUARIO/Downloads/ReportesEstudiantes.xlsx";
         } else {
-            return "error no genero reporte";
+            return "";
         }
     }
 

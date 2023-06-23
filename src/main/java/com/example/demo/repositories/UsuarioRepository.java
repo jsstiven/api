@@ -33,4 +33,14 @@ public interface UsuarioRepository extends JpaRepository<UsuariosModel, Integer>
     public UsuariosModel guardarUsuario(@Param("cc") Integer cc, @Param("nombres") String nombres,
             @Param("apellidos") String apellidos, @Param("correo") String correo, @Param("usuario") String usuario,
             @Param("contrasena") String contrasena, @Param("programaid") Integer programaid);
+
+    //listar roles
+    @Query(value = "select idrol, rol from roles", nativeQuery = true)
+    public ArrayList<Tuple> listarRoles();
+
+    //listar estudiantes
+    @Query(value = "select u.cc as cedula, CONCAT(u.nombres, ' ', u.apellidos) as nombres, u.correo as correo, pac.nombre as programa from usuarios u JOIN roles_has_usuarios rhu ON rhu.usuarios_cc = u.cc JOIN programaac pac ON pac.idprogramaac = u.programaid where rhu.roles_idroles = 1 AND u.cc not in (select cc from usuarios u1 JOIN roles_has_usuarios rhu1 ON rhu1.usuarios_cc = u1.cc where rhu1.roles_idroles = 2 or rhu1.roles_idroles = 3 and rhu1.roles_idroles = 1)", nativeQuery = true)
+    public ArrayList<Tuple> listarEstudiantes();
+
+
 }

@@ -33,7 +33,7 @@ public class AsistenciaTuController {
                 "C:\\Users\\USUARIO\\Downloads\\ReportesTutores.xlsx")) {
             return "C:/Users/USUARIO/Downloads/ReportesTutores.xlsx";
         } else {
-            return "Error no genero reporte";
+            return "";
         }
     }
 

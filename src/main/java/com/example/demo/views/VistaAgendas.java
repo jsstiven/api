@@ -6,9 +6,10 @@ import java.sql.Time;
 public class VistaAgendas {
 
     Integer idagendacion;
-    Integer cedula;
-    String nombres;
-    String apellidos;
+    Integer cedulaTutor;
+    String nombresTutor;
+    Integer cedulaEstudiante;
+    String nombresEstudiante;
     String tema;
     Date fecha;
     Time hora;
@@ -21,28 +22,36 @@ public class VistaAgendas {
         this.idagendacion = idagendacion;
     }
 
-    public Integer getCedula() {
-        return cedula;
+    public Integer getCedulaTutor() {
+        return cedulaTutor;
     }
 
-    public void setCedula(Integer cedula) {
-        this.cedula = cedula;
+    public void setCedulaTutor(Integer cedulaTutor) {
+        this.cedulaTutor = cedulaTutor;
     }
 
-    public String getNombres() {
-        return nombres;
+    public String getNombresTutor() {
+        return nombresTutor;
     }
 
-    public void setNombres(String nombres) {
-        this.nombres = nombres;
+    public void setNombresTutor(String nombresTutor) {
+        this.nombresTutor = nombresTutor;
     }
 
-    public String getApellidos() {
-        return apellidos;
+    public Integer getCedulaEstudiante() {
+        return cedulaEstudiante;
     }
 
-    public void setApellidos(String apellidos) {
-        this.apellidos = apellidos;
+    public void setCedulaEstudiante(Integer cedulaEstudiante) {
+        this.cedulaEstudiante = cedulaEstudiante;
+    }
+
+    public String getNombresEstudiante() {
+        return nombresEstudiante;
+    }
+
+    public void setNombresEstudiante(String nombresEstudiante) {
+        this.nombresEstudiante = nombresEstudiante;
     }
 
     public String getTema() {

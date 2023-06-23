@@ -48,9 +48,10 @@ public class AgendacionService {
         for (Tuple i : agendacionRepository.reporteAgendacion()) {
 
             agenda.setIdagendacion((Integer) i.get("idagendacion"));
-            agenda.setCedula((Integer) i.get("cedula"));
-            agenda.setNombres((String) i.get("nombres"));
-            agenda.setApellidos((String) i.get("apellidos"));
+            agenda.setCedulaTutor((Integer) i.get("cedulatutor"));
+            agenda.setNombresTutor((String) i.get("nombretutor"));
+            agenda.setCedulaEstudiante((Integer) i.get("cedulaestudiante"));
+            agenda.setNombresEstudiante((String) i.get("nombreestudiante"));
             agenda.setTema((String) i.get("tema"));
             agenda.setFecha((Date) i.get("fecha"));
             agenda.setHora((Time) i.get("hora"));
