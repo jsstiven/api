@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.models.AgendacionModel;
+import com.example.demo.models.Agendacion_Has_Roles_Has_UsuariosModel;
 import com.example.demo.services.AgendacionService;
 import com.example.demo.services.Agendacion_Has_Roles_Has_UsuariosService;
+import com.example.demo.views.VistaAgendas;
 
 @RestController
 @Controller
@@ -47,14 +49,32 @@ public class AgendacionController {
 
     // Editar hora agendacion
     @PostMapping("/editaragenda")
-    public String editarAgenda(@RequestBody AgendacionModel agendacionModel) {
+    public String editarAgenda(@RequestBody VistaAgendas vistaAgendas) {
+        
+        AgendacionModel agendacionModel = new AgendacionModel();
+        Agendacion_Has_Roles_Has_UsuariosModel ahru = new Agendacion_Has_Roles_Has_UsuariosModel();
+
+        ahru.setRoles_has_usuarios(vistaAgendas.getIdTutor());
+        ahru.setAgendacion_idagendacion(vistaAgendas.getIdagendacion());
+
+        agendacionModel.setIdagendacion(vistaAgendas.getIdagendacion());
+        agendacionModel.setTema(vistaAgendas.getTema());
+        agendacionModel.setGrupo(vistaAgendas.getGrupo());
+        agendacionModel.setCces(vistaAgendas.getCedulaEstudiante());
+        agendacionModel.setFecha(vistaAgendas.getFecha());
+        agendacionModel.setHora(vistaAgendas.getHora());
+
         try {
             try {
                 agendacionService.editarAgenda(agendacionModel);
             } catch (Exception e) {
                 System.out.println("no traer consulta");
             }
-
+            try {
+                agrhuService.editarAsigAgenda(ahru);
+            } catch (Exception e) {
+                System.out.println("no traer consulta");
+            }
             return "Se ha editado la agendacion con exito";
 
         } catch (Exception e) {

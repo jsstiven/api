@@ -39,6 +39,48 @@ public class AsistenciaEsController {
         }
     }
 
+    //Editar Asistencia Tutoria
+    @PostMapping("/editarasisestudiante")
+    public String editarAsisEstudiante(@RequestBody VistaReporteAsistenciaEs vrae) {
+
+        AsistenciaEsModel asies = new AsistenciaEsModel();
+        CalificacionModel ca = new CalificacionModel();
+        try {
+
+            asies.setAsignatura(vrae.getAsignatura());
+            asies.setGrupo(vrae.getGrupo());
+            asies.setDia(vrae.getFecha());
+            asies.setId_roles_has_usuarios(vrae.getCedula());
+            asies.setTema(vrae.getTema());
+            asies.setCcEs(vrae.getCedulaEstudiante());
+
+            ca.setPuntuacion(vrae.getPuntuacion());
+            ca.setComentarios(vrae.getComentarios());
+            ca.setCces(vrae.getCedulaEstudiante());
+            ca.setId_roles_has_usuarios(vrae.getCedula());
+
+            try {
+                asEstuService.editarAsistenciaEs(asies, vrae.getIdasistencia());
+            
+            } catch (Exception e) {
+                System.out.println("no trae consulta");    
+            }
+
+            try {
+                calificacionService.editarCalificacion(ca, vrae.getIdCalificacion());
+            
+            } catch (Exception e) {
+                System.out.println("no trae consulta");    
+            }
+
+            return "La asistencia se ha editado con exito";
+        } catch (Exception e) {
+            System.out.println(e);
+            return "No se pudo guardar la asistencia";
+        }
+    }
+
+
     // Guardar asistencia estudiante
 
     @PostMapping("/guardarasisestudiante")

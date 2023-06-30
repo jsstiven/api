@@ -42,7 +42,7 @@ public class UsuarioController {
 
     @GetMapping("/listatutores")
     public String listaTutores() {
-        ArrayList<UsuariosModel> dato = usuarioService.listaTutores();
+        ArrayList<VistaEstudiantes> dato = usuarioService.listaTutores();
         JSONArray arrayjs = new JSONArray(dato.toArray());
         if (!arrayjs.toString().isEmpty()) {
             return arrayjs.toString();
@@ -60,7 +60,7 @@ public class UsuarioController {
         if (!arrayjs.toString().isEmpty()) {
             return arrayjs.toString();
         } else {
-            return "No hay registros";
+            return "";
         }
     }
 
@@ -76,6 +76,39 @@ public class UsuarioController {
             return "No hay registros";
         }
     }
+
+    // Crear asignacion
+
+    @PostMapping("/asignarbecario")
+    public String crearBecario(@RequestBody Roles_Has_UsuariosModel roles_Has_UsuariosModel){
+        try {
+            try {
+                rhuService.guardarAsignacion(roles_Has_UsuariosModel);
+            } catch (Exception e) {
+                System.out.println("ERROR");
+            }
+            return "Se guardo correctamente el tutor";
+        } catch (Exception e) {
+            return "";
+        }
+    }
+
+    // Editar asignacion 
+    @PostMapping("/editarbecario")
+    public String editarBecario(@RequestBody Roles_Has_UsuariosModel roles_Has_UsuariosModel){
+        try {
+            try {
+                rhuService.editarAsignacion(roles_Has_UsuariosModel);
+            } catch (Exception e) {
+                System.out.println("ERROR");
+            }
+            return "se guardo correctamente";
+        } catch (Exception e) {
+            return "";
+        }
+    }
+
+    //Eliminar 
 
     // Guardar Usuario
     @PostMapping("/guardarusuario")
@@ -105,7 +138,8 @@ public class UsuarioController {
             }
             try {
                 System.out.println(nuevaAsig.getRoles_idroles() + " / " + nuevaAsig.getUsuarios_cc() + " / ");
-                rhuService.guardarAsignacion(nuevaAsig);
+                nuevaAsig = new Roles_Has_UsuariosModel();
+                usuariosModel = new UsuariosModel();
             } catch (Exception e) {
                 System.out.println("error de no traer consulta");
             }
@@ -118,6 +152,8 @@ public class UsuarioController {
         }
 
     }
+
+    //Editar Usuario
 
     // Login
     @PostMapping("/login")

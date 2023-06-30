@@ -6,10 +6,12 @@ import java.sql.Time;
 public class VistaAgendas {
 
     Integer idagendacion;
+    Integer idTutor;
     Integer cedulaTutor;
     String nombresTutor;
     Integer cedulaEstudiante;
     String nombresEstudiante;
+    String grupo;
     String tema;
     Date fecha;
     Time hora;
@@ -76,6 +78,22 @@ public class VistaAgendas {
 
     public void setHora(Time hora) {
         this.hora = hora;
+    }
+
+    public String getGrupo() {
+        return grupo;
+    }
+
+    public void setGrupo(String grupo) {
+        this.grupo = grupo;
+    }
+
+    public Integer getIdTutor() {
+        return idTutor;
+    }
+
+    public void setIdTutor(Integer idTutor) {
+        this.idTutor = idTutor;
     }
 
 }

@@ -12,7 +12,10 @@ public class Roles_Has_UsuariosService {
     Roles_Has_UsuariosRepository rhuRepository;
 
     public void guardarAsignacion(Roles_Has_UsuariosModel rhuModel) {
-        rhuRepository.guardarasig(rhuModel.getRoles_idroles(), rhuModel.getUsuarios_cc());
+        rhuRepository.guardarAsig(rhuModel.getRoles_idroles(), rhuModel.getUsuarios_cc());
     }
-
+ 
+    public void editarAsignacion(Roles_Has_UsuariosModel rhuModel) {
+        rhuRepository.editarAsig( rhuModel.getRoles_idroles(), rhuModel.getUsuarios_cc());
+    }
 }

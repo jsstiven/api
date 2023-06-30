@@ -47,19 +47,20 @@ public class UsuarioService {
 
     // Listar Tutores
 
-    public ArrayList<UsuariosModel> listaTutores() {
-        ArrayList<UsuariosModel> dato = new ArrayList<UsuariosModel>();
-        UsuariosModel u = new UsuariosModel();
+    public ArrayList<VistaEstudiantes> listaTutores() {
+        ArrayList<VistaEstudiantes> dato = new ArrayList<VistaEstudiantes>();
+        VistaEstudiantes u = new VistaEstudiantes();
 
         for (Tuple i : usuarioRepository.listarTutores()) {
 
-            u.setCc((Integer) i.get("id"));
+            u.setCedula((Integer) i.get("id"));
             u.setNombres((String) i.get("nombres"));
-            u.setApellidos((String) i.get("apellidos"));
+            u.setCorreo((String) i.get("correo"));
+            u.setPrograma((String) i.get("programa"));
 
             dato.add(u);
 
-            u = new UsuariosModel();
+            u = new VistaEstudiantes();
         }
 
         return dato;

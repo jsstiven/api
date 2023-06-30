@@ -87,6 +87,14 @@ public class AsistenciaEsService {
         }
     }
 
+    // Editar asistencia estudiante
+
+    public void editarAsistenciaEs(AsistenciaEsModel asistenciaEsModel, Integer idAsistencia) {
+        asistenciaEsRepository.editarAsisEstudiantes(asistenciaEsModel.getAsignatura(), asistenciaEsModel.getGrupo(),
+                asistenciaEsModel.getDia(), asistenciaEsModel.getId_roles_has_usuarios(), asistenciaEsModel.getTema(),
+                asistenciaEsModel.getCcEs(), idAsistencia);
+    }
+
     // Guardar asistencia estudiante
     public void guardarAsistenciaEs(AsistenciaEsModel asistenciaEsModel) {
         asistenciaEsRepository.save(asistenciaEsModel);
@@ -102,8 +110,11 @@ public class AsistenciaEsService {
 
             asiEstu.setCedulaTutor((Integer) i.get("cedulatutor"));
             asiEstu.setCedula((Integer) i.get("cedula"));
+            asiEstu.setIdCalificacion((Integer) i.get("idCalificacion"));
+            asiEstu.setIdasistencia((Integer) i.get("idAsistencia"));
             asiEstu.setNombresTutor((String) i.get("nombresTutor"));
             asiEstu.setAsignatura((String) i.get("asignatura"));
+            asiEstu.setGrupo((String) i.get("grupo"));
             asiEstu.setTema((String) i.get("tema"));
             asiEstu.setFecha((Date) i.get("fecha"));
             asiEstu.setCedulaEstudiante((Integer) i.get("cedulaEstudiante"));

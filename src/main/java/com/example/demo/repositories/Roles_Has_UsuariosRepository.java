@@ -13,7 +13,11 @@ import com.example.demo.models.Roles_Has_UsuariosModel;
 public interface Roles_Has_UsuariosRepository extends JpaRepository<Roles_Has_UsuariosModel, Integer> {
 
     @Query(value = "INSERT INTO public.roles_has_usuarios(roles_idroles, usuarios_cc) VALUES (:roles_idroles, :usuarios_cc)", nativeQuery = true)
-    public Roles_Has_UsuariosModel guardarasig(@Param("roles_idroles") Integer roles_idroles,
+    public Roles_Has_UsuariosModel guardarAsig(@Param("roles_idroles") Integer roles_idroles,
             @Param("usuarios_cc") Integer usuarios_cc);
 
+    @Query(value = "UPDATE public.roles_has_usuarios SET roles_idroles= :roles_idroles WHERE id = (select id from roles_has_usuarios where usuarios_cc = :usuarios_cc and roles_idroles != 1)", nativeQuery = true)
+    public Roles_Has_UsuariosModel editarAsig(@Param("roles_idroles") Integer roles_idroles,
+            @Param("usuarios_cc") Integer usuarios_cc);
+            
 }

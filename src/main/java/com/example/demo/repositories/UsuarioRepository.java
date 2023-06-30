@@ -21,7 +21,7 @@ public interface UsuarioRepository extends JpaRepository<UsuariosModel, Integer>
     public UsuariosModel cambioContrasena(@Param("correo") String correo, @Param("contrasena") String contrasena );
 
     // listar tutores
-    @Query(value = "select rhu.id as id, u.nombres as nombres, u.apellidos as apellidos from usuarios u join roles_has_usuarios rhu ON rhu.usuarios_cc = u.cc where rhu.roles_idroles = 2", nativeQuery = true)
+    @Query(value = "select rhu.id as id, CONCAT(u.nombres, ' ', u.apellidos) as nombres, u.correo as correo, proac.nombre as programa from usuarios u join roles_has_usuarios rhu ON rhu.usuarios_cc = u.cc JOIN programaac proac ON proac.idprogramaac = u.programaid where rhu.roles_idroles = 2", nativeQuery = true)
     public ArrayList<Tuple> listarTutores();
 
     // login
@@ -35,11 +35,11 @@ public interface UsuarioRepository extends JpaRepository<UsuariosModel, Integer>
             @Param("contrasena") String contrasena, @Param("programaid") Integer programaid);
 
     //listar roles
-    @Query(value = "select idrol, rol from roles", nativeQuery = true)
+    @Query(value = "select idrol, rol from roles where idrol != 1", nativeQuery = true)
     public ArrayList<Tuple> listarRoles();
 
     //listar estudiantes
-    @Query(value = "select u.cc as cedula, CONCAT(u.nombres, ' ', u.apellidos) as nombres, u.correo as correo, pac.nombre as programa from usuarios u JOIN roles_has_usuarios rhu ON rhu.usuarios_cc = u.cc JOIN programaac pac ON pac.idprogramaac = u.programaid where rhu.roles_idroles = 1 AND u.cc not in (select cc from usuarios u1 JOIN roles_has_usuarios rhu1 ON rhu1.usuarios_cc = u1.cc where rhu1.roles_idroles = 2 or rhu1.roles_idroles = 3 and rhu1.roles_idroles = 1)", nativeQuery = true)
+    @Query(value = "select u.cc as cedula, CONCAT(u.nombres, ' ', u.apellidos) as nombres, u.correo as correo, pac.nombre as programa from usuarios u JOIN roles_has_usuarios rhu ON rhu.usuarios_cc = u.cc JOIN programaac pac ON pac.idprogramaac = u.programaid where rhu.roles_idroles = 1 AND u.cc not in (select cc from usuarios u1 JOIN roles_has_usuarios rhu1 ON rhu1.usuarios_cc = u1.cc where rhu1.roles_idroles = 2 or rhu1.roles_idroles = 3)", nativeQuery = true)
     public ArrayList<Tuple> listarEstudiantes();
 
 

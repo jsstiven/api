@@ -15,6 +15,11 @@ import com.example.demo.models.CalificacionModel;
 @EnableJpaRepositories
 public interface CalificacionRepository extends JpaRepository<CalificacionModel, Integer> {
 
+    @Query(value = "UPDATE public.calificacion SET comentarios = :comentarios, puntuacion = :puntuacion, cces = :cedulaes, id_roles_has_usuarios = :rhu WHERE idcalificacion = :idcalificacion", nativeQuery = true)
+    public void editarCalificacion(@Param("comentarios") String comentarios, @Param("puntuacion") Integer puntuacion,
+            @Param("cedulaes") Integer cedulaes, @Param("rhu") Integer rhu, @Param("idcalificacion") Integer idCalificacion);
+
+
     @Query(value = "insert into public.calificacion(comentarios, puntuacion, cces, id_roles_has_usuarios, idasistenciases) values (:comentarios, :puntuacion, :cedulaes, :rhu, (select max(es.idasistenciases) from asistenciases es))", nativeQuery = true)
     public void guardarCalificacion(@Param("comentarios") String comentarios, @Param("puntuacion") Integer puntuacion,
             @Param("cedulaes") Integer cedulaes, @Param("rhu") Integer rhu);

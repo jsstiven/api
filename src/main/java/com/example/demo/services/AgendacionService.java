@@ -29,7 +29,10 @@ public class AgendacionService {
     // Editar agendacion
 
     public void editarAgenda(AgendacionModel agendacionModel) {
-        agendacionRepository.editarAgenda(agendacionModel.getFecha(), agendacionModel.getHora(),
+        System.out.println(agendacionModel.getIdagendacion());
+        System.out.println(agendacionModel.getCces());
+        agendacionRepository.editarAgenda(agendacionModel.getTema(), agendacionModel.getGrupo(),
+                agendacionModel.getCces(), agendacionModel.getFecha(), agendacionModel.getHora(),
                 agendacionModel.getIdagendacion());
     }
 
@@ -48,14 +51,16 @@ public class AgendacionService {
         for (Tuple i : agendacionRepository.reporteAgendacion()) {
 
             agenda.setIdagendacion((Integer) i.get("idagendacion"));
+            agenda.setIdTutor((Integer) i.get("idTutor"));
             agenda.setCedulaTutor((Integer) i.get("cedulatutor"));
             agenda.setNombresTutor((String) i.get("nombretutor"));
             agenda.setCedulaEstudiante((Integer) i.get("cedulaestudiante"));
             agenda.setNombresEstudiante((String) i.get("nombreestudiante"));
             agenda.setTema((String) i.get("tema"));
+            agenda.setGrupo((String) i.get("grupo"));
             agenda.setFecha((Date) i.get("fecha"));
             agenda.setHora((Time) i.get("hora"));
-
+            
             dato.add(agenda);
 
             agenda = new VistaAgendas();

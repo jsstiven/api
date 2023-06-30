@@ -3,10 +3,14 @@ package com.example.demo.views;
 import java.sql.Date;
 
 public class VistaReporteAsistenciaEs {
+
     Integer cedulaTutor;
     Integer cedula;
+    Integer idCalificacion;
+    Integer idasistencia;
     String nombresTutor;
     String asignatura;
+    String grupo;
     String tema;
     Date fecha;
     Integer cedulaEstudiante;
@@ -101,6 +105,30 @@ public class VistaReporteAsistenciaEs {
 
     public void setCedulaTutor(Integer cedulaTutor) {
         this.cedulaTutor = cedulaTutor;
+    }
+
+    public Integer getIdCalificacion() {
+        return idCalificacion;
+    }
+
+    public void setIdCalificacion(Integer idCalificacion) {
+        this.idCalificacion = idCalificacion;
+    }
+
+    public Integer getIdasistencia() {
+        return idasistencia;
+    }
+
+    public void setIdasistencia(Integer idasistencia) {
+        this.idasistencia = idasistencia;
+    }
+
+    public String getGrupo() {
+        return grupo;
+    }
+
+    public void setGrupo(String grupo) {
+        this.grupo = grupo;
     }
 
 }

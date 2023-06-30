@@ -13,6 +13,13 @@ public class CalificacionService {
     @Autowired
     CalificacionRepository calificacionRepositry;
 
+    // Editar Calificacion
+
+    public void editarCalificacion(CalificacionModel calificacionModel, Integer idCalificacion) {
+        calificacionRepositry.editarCalificacion(calificacionModel.getComentarios(), calificacionModel.getPuntuacion(),
+                calificacionModel.getCces(), calificacionModel.getId_roles_has_usuarios(), idCalificacion);
+    }
+
     // Guardar Calificacion
 
     public void guardarCalificacion(CalificacionModel calificacionModel) {
