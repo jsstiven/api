@@ -39,7 +39,7 @@ public class AsistenciaEsController {
         }
     }
 
-    //Editar Asistencia Tutoria
+    // Editar Asistencia Tutoria
     @PostMapping("/editarasisestudiante")
     public String editarAsisEstudiante(@RequestBody VistaReporteAsistenciaEs vrae) {
 
@@ -61,16 +61,16 @@ public class AsistenciaEsController {
 
             try {
                 asEstuService.editarAsistenciaEs(asies, vrae.getIdasistencia());
-            
+
             } catch (Exception e) {
-                System.out.println("no trae consulta");    
+                System.out.println("no trae consulta");
             }
 
             try {
                 calificacionService.editarCalificacion(ca, vrae.getIdCalificacion());
-            
+
             } catch (Exception e) {
-                System.out.println("no trae consulta");    
+                System.out.println("no trae consulta");
             }
 
             return "La asistencia se ha editado con exito";
@@ -79,7 +79,6 @@ public class AsistenciaEsController {
             return "No se pudo guardar la asistencia";
         }
     }
-
 
     // Guardar asistencia estudiante
 
@@ -101,14 +100,21 @@ public class AsistenciaEsController {
             ca.setComentarios(vistaGuardarAsisEs.getComentarios());
             ca.setCces(vistaGuardarAsisEs.getCces());
             ca.setId_roles_has_usuarios(vistaGuardarAsisEs.getId_roles_has_usuarios());
+            
+            try {
 
-            asEstuService.guardarAsistenciaEs(asies);
+                asEstuService.guardarAsistenciaEs(asies);
+
+            } catch (Exception e) {
+                System.out.println("no trae consulta");
+            }
+
             try {
 
                 calificacionService.guardarCalificacion(ca);
 
             } catch (Exception e) {
-                System.out.println("no trae consulta");    
+                System.out.println("no trae consulta");
             }
             return "La asistencia se ha guardado con exito";
         } catch (Exception e) {

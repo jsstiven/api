@@ -2,6 +2,8 @@ package com.example.demo.services;
 
 import java.io.FileOutputStream;
 import java.sql.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -90,14 +92,31 @@ public class AsistenciaEsService {
     // Editar asistencia estudiante
 
     public void editarAsistenciaEs(AsistenciaEsModel asistenciaEsModel, Integer idAsistencia) {
+
+        LocalDate fecha = LocalDate.of(asistenciaEsModel.getDia().getYear(), asistenciaEsModel.getDia().getMonth(),
+                asistenciaEsModel.getDia().getDate() + 1);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("YY-MM-dd");
+        String fechaFormateada = fecha.format(formatter);
+        fechaFormateada = "20" + fechaFormateada;
+
         asistenciaEsRepository.editarAsisEstudiantes(asistenciaEsModel.getAsignatura(), asistenciaEsModel.getGrupo(),
-                asistenciaEsModel.getDia(), asistenciaEsModel.getId_roles_has_usuarios(), asistenciaEsModel.getTema(),
+                fechaFormateada, asistenciaEsModel.getId_roles_has_usuarios(), asistenciaEsModel.getTema(),
                 asistenciaEsModel.getCcEs(), idAsistencia);
     }
 
     // Guardar asistencia estudiante
     public void guardarAsistenciaEs(AsistenciaEsModel asistenciaEsModel) {
-        asistenciaEsRepository.save(asistenciaEsModel);
+
+        LocalDate fecha = LocalDate.of(asistenciaEsModel.getDia().getYear(), asistenciaEsModel.getDia().getMonth(),
+                asistenciaEsModel.getDia().getDate() + 1);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("YY-MM-dd");
+        String fechaFormateada = fecha.format(formatter);
+        fechaFormateada = "20" + fechaFormateada;
+
+        asistenciaEsRepository.guardarAsisEstudiantes(asistenciaEsModel.getAsignatura(), asistenciaEsModel.getGrupo(),
+                fechaFormateada, asistenciaEsModel.getId_roles_has_usuarios(), asistenciaEsModel.getTema(),
+                asistenciaEsModel.getCcEs());
+
     }
 
     // Reporte asistencia estudiantes

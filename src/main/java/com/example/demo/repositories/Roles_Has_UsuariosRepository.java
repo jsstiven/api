@@ -16,8 +16,8 @@ public interface Roles_Has_UsuariosRepository extends JpaRepository<Roles_Has_Us
     public Roles_Has_UsuariosModel guardarAsig(@Param("roles_idroles") Integer roles_idroles,
             @Param("usuarios_cc") Integer usuarios_cc);
 
-    @Query(value = "UPDATE public.roles_has_usuarios SET roles_idroles= :roles_idroles WHERE id = (select id from roles_has_usuarios where usuarios_cc = :usuarios_cc and roles_idroles != 1)", nativeQuery = true)
-    public Roles_Has_UsuariosModel editarAsig(@Param("roles_idroles") Integer roles_idroles,
-            @Param("usuarios_cc") Integer usuarios_cc);
+    @Query(value = "UPDATE public.roles_has_usuarios SET roles_idroles = :idroles WHERE id = :idBecarios", nativeQuery = true)
+    public void editarBecario(@Param("idroles") Integer roles_idroles,
+            @Param("idBecarios") Integer idBecarios);
             
 }

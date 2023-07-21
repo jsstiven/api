@@ -29,10 +29,14 @@ public class AgendacionController {
 
     // Guardar agendacion
     @PostMapping("/guardaragenda/query")
-    public String guaradarAgenda(@RequestBody AgendacionModel agendacionModel,
+    public String guardarAgenda(@RequestBody AgendacionModel agendacionModel,
             @RequestParam("cedulatu") Integer idtutor) {
         try {
-            agendacionService.guardarAgendacion(agendacionModel);
+            try {
+                agendacionService.guardarAgendacion(agendacionModel);
+            } catch (Exception e) {
+                System.out.println("no trae consulta");
+            }
             try {
                 agrhuService.guardarAsigAgenda(idtutor);
             } catch (Exception e) {
@@ -41,7 +45,6 @@ public class AgendacionController {
 
             return "Agendacion guardada con exito";
         } catch (Exception e) {
-            System.out.println(e);
             return "No se pudo guardar la agendacion";
         }
 
@@ -50,7 +53,7 @@ public class AgendacionController {
     // Editar hora agendacion
     @PostMapping("/editaragenda")
     public String editarAgenda(@RequestBody VistaAgendas vistaAgendas) {
-        
+
         AgendacionModel agendacionModel = new AgendacionModel();
         Agendacion_Has_Roles_Has_UsuariosModel ahru = new Agendacion_Has_Roles_Has_UsuariosModel();
 
@@ -78,7 +81,6 @@ public class AgendacionController {
             return "Se ha editado la agendacion con exito";
 
         } catch (Exception e) {
-            System.out.println(e);
             return "No se pudo editar la agendacion";
         }
     }
@@ -95,8 +97,7 @@ public class AgendacionController {
 
             return "Se ha cancelado la Tutoria con exito";
         } catch (Exception e) {
-            System.out.println(e);
-            return "Nose pudo cancelar la tutoria";
+            return "No se pudo cancelar la tutoria";
         }
 
     }

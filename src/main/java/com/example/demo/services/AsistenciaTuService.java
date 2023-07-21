@@ -1,7 +1,10 @@
 package com.example.demo.services;
 
 import java.io.FileOutputStream;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -18,8 +21,6 @@ import org.springframework.stereotype.Service;
 import com.example.demo.models.asistenciaTuModel;
 import com.example.demo.repositories.AsistenciaTuRepository;
 import com.example.demo.views.VistaReporteAsistenciaTu;
-
-
 
 @Service
 
@@ -69,9 +70,9 @@ public class AsistenciaTuService {
 
                 for (int i = 0; i < bodyExcel2.length; i++) {
                     nCell = nRow.createCell(i);
-                    if(bodyExcel2[i] != null){                    
-                        nCell.setCellValue(bodyExcel2[i].toString());   
-                    }else{
+                    if (bodyExcel2[i] != null) {
+                        nCell.setCellValue(bodyExcel2[i].toString());
+                    } else {
                         nCell.setCellValue("");
                     }
                 }
@@ -110,8 +111,42 @@ public class AsistenciaTuService {
             datofinal = datofinal + caracter[i];
         }
 
-        asistenciaTuRepository.guaradarAsistenciaTu(datofinal, asistenciaTuModel.getId_roles_has_usuarios(), asistenciaTuModel.getFecha());
+        LocalDate fecha = LocalDate.of(asistenciaTuModel.getFecha().getYear(), asistenciaTuModel.getFecha().getMonth(),
+                asistenciaTuModel.getFecha().getDate() + 1);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("YY-MM-dd");
+        String fechaFormateada = fecha.format(formatter);
+        fechaFormateada = "20" + fechaFormateada;
 
+        asistenciaTuRepository.guardarAsistenciaTu(datofinal, asistenciaTuModel.getId_roles_has_usuarios(),
+                fechaFormateada);
+
+    }
+
+    // Editar Asistencia tutores
+
+    public void editarAsisTutor(asistenciaTuModel asistenciaTuModel) {
+        String caracteres = asistenciaTuModel.getDatos().toString();
+        char[] caracter = new char[asistenciaTuModel.getDatos().toString().length()];
+        String datofinal = "";
+        for (int i = 0; i < caracter.length; i++) {
+            if (caracteres.charAt(i) == '=') {
+                caracter[i] = ':';
+            } else {
+                caracter[i] = caracteres.charAt(i);
+            }
+        }
+        for (int i = 0; i < caracter.length; i++) {
+            datofinal = datofinal + caracter[i];
+        }
+
+        LocalDate fecha = LocalDate.of(asistenciaTuModel.getFecha().getYear(), asistenciaTuModel.getFecha().getMonth(),
+                asistenciaTuModel.getFecha().getDate() + 1);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("YY-MM-dd");
+        String fechaFormateada = fecha.format(formatter);
+        fechaFormateada = "20" + fechaFormateada;
+
+        asistenciaTuRepository.editarAsistenciaTu(asistenciaTuModel.getIdasistenciatu(), datofinal,
+                asistenciaTuModel.getId_roles_has_usuarios(), fechaFormateada);
     }
 
     // Reporte asistencia tutores
@@ -157,6 +192,8 @@ public class AsistenciaTuService {
 
             asiTu.setNombreTutor(obj.get("nombre_tutor").toString());
             asiTu.setFecha(obj.get("fecha").toString());
+            asiTu.setIdAsistenciaTutor(Integer.parseInt(obj.get("id").toString()));
+            asiTu.setCedula(Integer.parseInt(obj.get("cedula").toString()));
 
             dato.add(asiTu);
 
@@ -165,19 +202,6 @@ public class AsistenciaTuService {
         }
 
         return dato;
-    }
-
-    // Reporte asistencia tutores
-
-    public String listaAsisTu() {
-
-        JSONArray arrayjs = new JSONArray(asistenciaTuRepository.reporteBecarios());
-        if(!arrayjs.toString().isEmpty()){
-            return arrayjs.toString();
-        }else{
-            return "No se encontro registros";
-        }
-
     }
 
 }

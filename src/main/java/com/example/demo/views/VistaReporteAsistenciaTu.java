@@ -2,6 +2,8 @@ package com.example.demo.views;
 
 public class VistaReporteAsistenciaTu {
 
+    private Integer cedula;
+    private Integer idAsistenciaTutor;
     private String dia;
     private String fecha;
     private String horaEntrada1;
@@ -64,6 +66,22 @@ public class VistaReporteAsistenciaTu {
 
     public void setNombreTutor(String nombreTutor) {
         this.nombreTutor = nombreTutor;
+    }
+
+    public Integer getCedula() {
+        return cedula;
+    }
+
+    public void setCedula(Integer cedula) {
+        this.cedula = cedula;
+    }
+
+    public Integer getIdAsistenciaTutor() {
+        return idAsistenciaTutor;
+    }
+
+    public void setIdAsistenciaTutor(Integer idAsistenciaTutor) {
+        this.idAsistenciaTutor = idAsistenciaTutor;
     }
 
 }

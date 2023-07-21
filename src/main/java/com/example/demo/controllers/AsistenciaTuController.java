@@ -43,8 +43,6 @@ public class AsistenciaTuController {
     public String guardarAsisTutor(@RequestBody asistenciaTuModel asistenciaTuModel) {
 
         try {
-            System.out.println(asistenciaTuModel.getId_roles_has_usuarios());
-            System.out.println(asistenciaTuModel.getDatos().toString());
             try {
                 asTuService.guardarAsisTutor(asistenciaTuModel);
             } catch (Exception e) {
@@ -62,9 +60,20 @@ public class AsistenciaTuController {
         return asTuService.reporteAsisTu();
     }
 
-    // Reporte Tutor
-    @GetMapping("/listartutor")
-    public String listarTutor() {
-        return asTuService.listaAsisTu();
+    // Editar asistencia tutor
+    @PostMapping("/editarasistencia")
+    public String editarAsisTutor(@RequestBody asistenciaTuModel asistenciaTuModel) {
+
+        try {
+            
+            try {
+                asTuService.editarAsisTutor(asistenciaTuModel);
+            } catch (Exception e) {
+                System.out.println("no trae consulta");
+            }
+            return "Se edito la asistencia";
+        } catch (Exception e) {
+            return "Error no edito la asistencia";
+        }
     }
 }

@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.services.CalificacionService;
 import com.example.demo.views.VistaGuardarAsisEs;
 
-
 @RestController
 @Controller
 @RequestMapping(value = "/calificacion")
@@ -23,18 +22,19 @@ public class CalificacionController {
     CalificacionService calificacionService;
 
     @GetMapping("/listadiaria")
-    public String listarCalificacionDiaria(){
+    public String listarCalificacionDiaria() {
         return calificacionService.listarDiario();
     }
 
     @PostMapping("/listamensual")
-    public String listarCalificacionMensual(@RequestBody VistaGuardarAsisEs vistaGuardarAsisEs){
+    public String listarCalificacionMensual(@RequestBody VistaGuardarAsisEs vistaGuardarAsisEs) {
         return calificacionService.listarMensual(vistaGuardarAsisEs.getId_roles_has_usuarios());
     }
 
     @PostMapping("/listamensualasig")
-    public String listarCalificacionMensualAsignatura(@RequestBody VistaGuardarAsisEs vistaGuardarAsisEs){
-        return calificacionService.listarMensualAsignatura(vistaGuardarAsisEs.getId_roles_has_usuarios(), vistaGuardarAsisEs.getAsignatura());
+    public String listarCalificacionMensualAsignatura(@RequestBody VistaGuardarAsisEs vistaGuardarAsisEs) {
+        return calificacionService.listarMensualAsignatura(vistaGuardarAsisEs.getId_roles_has_usuarios(),
+                vistaGuardarAsisEs.getAsignatura());
     }
 
 }

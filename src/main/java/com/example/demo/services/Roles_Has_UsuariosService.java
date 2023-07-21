@@ -14,8 +14,9 @@ public class Roles_Has_UsuariosService {
     public void guardarAsignacion(Roles_Has_UsuariosModel rhuModel) {
         rhuRepository.guardarAsig(rhuModel.getRoles_idroles(), rhuModel.getUsuarios_cc());
     }
- 
-    public void editarAsignacion(Roles_Has_UsuariosModel rhuModel) {
-        rhuRepository.editarAsig( rhuModel.getRoles_idroles(), rhuModel.getUsuarios_cc());
+
+    public void editarBecario(Roles_Has_UsuariosModel rhuModel) {
+
+        rhuRepository.editarBecario(rhuModel.getRoles_idroles(), rhuModel.getId());
     }
 }

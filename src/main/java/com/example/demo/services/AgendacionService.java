@@ -2,6 +2,8 @@ package com.example.demo.services;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,16 +25,30 @@ public class AgendacionService {
     // Guardar Agendacion
 
     public void guardarAgendacion(AgendacionModel agendacionModel) {
-        agendacionRepository.save(agendacionModel);
+
+        LocalDate fecha = LocalDate.of(agendacionModel.getFecha().getYear(), agendacionModel.getFecha().getMonth(),
+                agendacionModel.getFecha().getDate() + 1);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("YY-MM-dd");
+        String fechaFormateada = fecha.format(formatter);
+        fechaFormateada = "20" + fechaFormateada;
+        
+        agendacionRepository.guardarTutoria(agendacionModel.getTema(), agendacionModel.getGrupo(),
+                agendacionModel.getCces(), fechaFormateada, agendacionModel.getHora(), agendacionModel.getActivo());
+
     }
 
     // Editar agendacion
 
     public void editarAgenda(AgendacionModel agendacionModel) {
-        System.out.println(agendacionModel.getIdagendacion());
-        System.out.println(agendacionModel.getCces());
+
+        LocalDate fecha = LocalDate.of(agendacionModel.getFecha().getYear(), agendacionModel.getFecha().getMonth(),
+                agendacionModel.getFecha().getDate() + 1);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("YY-MM-dd");
+        String fechaFormateada = fecha.format(formatter);
+        fechaFormateada = "20" + fechaFormateada;
+
         agendacionRepository.editarAgenda(agendacionModel.getTema(), agendacionModel.getGrupo(),
-                agendacionModel.getCces(), agendacionModel.getFecha(), agendacionModel.getHora(),
+                agendacionModel.getCces(), fechaFormateada, agendacionModel.getHora(),
                 agendacionModel.getIdagendacion());
     }
 
@@ -60,7 +76,7 @@ public class AgendacionService {
             agenda.setGrupo((String) i.get("grupo"));
             agenda.setFecha((Date) i.get("fecha"));
             agenda.setHora((Time) i.get("hora"));
-            
+
             dato.add(agenda);
 
             agenda = new VistaAgendas();
